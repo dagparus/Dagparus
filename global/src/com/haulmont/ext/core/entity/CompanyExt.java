@@ -7,11 +7,7 @@ import javax.persistence.*;
 
 @Entity(name="ext$CompanyExt")
 @Table(name="EXT_COMPANY")
-<<<<<<< HEAD
 @PrimaryKeyJoinColumn(name = "COMPANY_ID",  referencedColumnName = "CONTRACTOR_ID")
-=======
-@PrimaryKeyJoinColumn(name = "COMPANY_ID", referencedColumnName = "CONTRACTOR_ID")
->>>>>>> fbd55ceff8d50f058f342d08c4708baaba478577
 @DiscriminatorValue("M")
 @NamePattern("%s|name")
 public class CompanyExt extends Company{
@@ -61,10 +57,6 @@ public class CompanyExt extends Company{
     }
 
     public void setParentCompanyExt(CompanyExt parentCompanyExt) {
-<<<<<<< HEAD
     this.parentCompanyExt = parentCompanyExt;
-=======
-        this.parentCompanyExt = parentCompanyExt;
->>>>>>> fbd55ceff8d50f058f342d08c4708baaba478577
     }
 }
