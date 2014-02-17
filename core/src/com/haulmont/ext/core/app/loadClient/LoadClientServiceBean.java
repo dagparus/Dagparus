@@ -81,7 +81,6 @@ public class LoadClientServiceBean implements LoadClientService {
                 }
             }
 
-
             String[] companyS = new String[6];
             companyS[0] = l[5];
             companyS[1] = l[6];
