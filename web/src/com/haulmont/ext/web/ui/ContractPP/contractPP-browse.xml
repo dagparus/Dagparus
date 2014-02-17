@@ -1,0 +1,80 @@
+<window
+        xmlns="http://schemas.haulmont.com/cuba/3.3/window.xsd"
+        messagesPack="com.haulmont.ext.web.ui.ContractPP"
+        caption="msg://browserCaption"
+        lookupComponent="contractPPTable"
+        class="com.haulmont.ext.web.ui.ContractPP.ContractPPBrowser"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://schemas.haulmont.com/cuba/3.3/window.xsd">
+
+    <dsContext>
+        <groupDatasource id="contractPPDs"
+                         class="com.haulmont.ext.core.entity.ContractPP"
+                         view="browse">
+            <datasourceClass>com.haulmont.docflow.web.ui.DocDatasource</datasourceClass>
+            <query>
+                <![CDATA[
+                select distinct i from ext$ContractPP i
+                where i.id <> :param$exclItem
+                and i.template = false
+                and i.versionOf is null
+                order by i.dateTime
+                ]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+  <layout expandLayout="true" spacing="true">
+        <vbox expand="split"
+              spacing="true">
+
+            <filter id="genericFilter"
+                    datasource="contractPPDs"
+                    stylename="edit-area">
+                <properties include=".*"
+                            exclude="template|templateName|createdBy
+                                |regNo|regDate|id|jbpmProcessId
+                                |createTs|docOfficeData|docKind
+                                |docCategory|category|locState
+                                |description|state|"/>
+            </filter>
+            <split id="split" orientation="vertical" pos="70">
+                <vbox id="table-panel" expand="contractPPTable" spacing="true">
+                    <groupTable id="contractPPTable" editable="false">
+                       <actions>
+                            <action id="edit"/>
+                            <action id="remove"/>
+                            <action id="excel"/>
+                            <action id="refresh"/>
+                        </actions>
+                        <buttonsPanel>
+                            <popupButton id="createButton" icon="icons/create.png" caption="msg://actions.Create"/>
+                            <button action="contractPPTable.edit"/>
+                            <button action="contractPPTable.refresh"/>
+                            <button action="contractPPTable.remove" icon="icons/remove.png"/>
+                            <popupButton id="printButton" icon="icons/print.png" caption="Печать" width="100%"/>
+
+                            <!--<button action="contractPPTable.excel"/>-->
+                         </buttonsPanel>
+                        <rowsCount/>
+                        <columns>
+                            <column id="number"/>
+                            <column id="nameContract"/>
+                            <column id="dateContr"/>
+                            <column id="amount"/>
+                            <column id="extCompany"/>
+                            <column id="client"/>
+                            <column id="villa"/>
+                            <column id="comment"/>
+                            <column id="hasAttachments"/>
+                        </columns>
+                        <rows datasource="contractPPDs"/>
+                    </groupTable>
+                </vbox>
+                <vbox id="resolutionsPane" expand="resolutionsFrame" spacing="true">
+                    <label value="msg://resolutions"/>
+                    <iframe id="resolutionsFrame" src="/com/haulmont/workflow/web/ui/base/resolutions-frame.xml"/>
+                </vbox>
+            </split>
+        </vbox>
+    </layout>
+</window>

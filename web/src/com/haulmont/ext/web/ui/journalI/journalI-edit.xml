@@ -1,0 +1,88 @@
+<window
+        xmlns = "http://www.haulmont.com/schema/cuba/gui/window.xsd"
+        class = "com.haulmont.ext.web.ui.journalI.JournalIEditor"
+        caption = "msg://editorCaption"
+        datasource = "journalIDs"
+        messagesPack = "com.haulmont.ext.web.ui.journalI"
+        focusComponent = "fieldGroup">
+
+    <dsContext>
+        <datasource id = "journalIDs"
+                    class = "com.haulmont.ext.core.entity.JournalI"
+                    view = "_local"/>
+    </dsContext>
+
+    <#assign width = 300>
+    <layout expand = "windowActions">
+        <vbox spacing = "true">
+
+            <grid id="grid" margin="true" spacing="true" expandable="false" stylename="edit-area">
+                <columns>
+                    <column flex="1"/>
+                    <column flex="1"/>
+                </columns>
+
+                <rows>
+                    <row>
+                        <label value="msg://numberJI"/>
+                        <textField id="numberJI"
+                                   datasource="journalIDs"
+                                   property="numberJI"
+                                   width="${width}"
+                                   required = "false"/>
+                    </row>
+
+                    <row>
+                        <label value="msg://dateJI"/>
+                        <dateField id = "dateJI"
+                                   property="dateJI"
+                                   datasource="journalIDs"
+                                   dateFormat="dd.MM.yyyy"
+                                   required = "false"/>
+                    </row>
+
+                    <row>
+                        <label value="msg://whom"/>
+                        <textField id="whom"
+                                   datasource="journalIDs"
+                                   property="whom"
+                                   width="${width}"
+                                   required = "false"/>
+                    </row>
+                    <row>
+                        <label value="msg://contentI"/>
+                        <textField id="contentI"
+                                   datasource="journalIDs"
+                                   property="contentI"
+                                   width="${width}"
+                                   required = "false"
+                                   rows = "2"/>
+                    </row>
+
+                    <row>
+                        <label value="msg://contactJI"/>
+                        <textField id="contactJI"
+                                   datasource="journalIDs"
+                                   property="contactJI"
+                                   width="${width}"
+                                   required = "false"
+                                   rows="2"/>
+                    </row>
+
+                    <row>
+                        <label value="msg://statusI"/>
+                        <textField id="statusI"
+                                   datasource="journalIDs"
+                                   property="statusI"
+                                   width="${width}"
+                                   required = "false"
+                                   rows="3"/>
+                    </row>
+                </rows>
+
+            </grid>
+        </vbox>
+        <iframe id = "windowActions"
+                src = "/com/haulmont/cuba/gui/edit-window.actions.xml"/>
+    </layout>
+</window>

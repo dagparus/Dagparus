@@ -1,0 +1,101 @@
+<!--
+  ~ Copyright (c) 2013 Haulmont Technology Ltd. All Rights Reserved.
+  ~ Haulmont Technology proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<window
+        xmlns="http://schemas.haulmont.com/cuba/3.3/window.xsd"
+        messagesPack="com.haulmont.ext.web.ui.Call"
+        caption="msg://browserCaption"
+        lookupComponent="callTable"
+        class="com.haulmont.ext.web.ui.Call.CallBrowser"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://schemas.haulmont.com/cuba/3.3/window.xsd">
+
+    <dsContext>
+        <groupDatasource id="callDs"
+                         class="com.haulmont.ext.core.entity.Call"
+                         view="browse">
+            <datasourceClass>com.haulmont.docflow.web.ui.DocDatasource</datasourceClass>
+            <query>
+                <![CDATA[
+                select distinct i from ext$Call i
+                where i.id <> :param$exclItem
+                and i.template = false
+                and i.versionOf is null
+                order by i.dateTime
+                ]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+
+    <layout expandLayout="true" spacing="true">
+        <vbox expand="split" spacing="true">
+          <grid spacing="true">
+            <columns>
+                <column flex="1"/>
+                <column flex="1"/>
+                <column flex="1"/>
+            </columns>
+            <rows>
+                <row id="filterRow">
+                    <vbox expand="genericFilter" stylename="edit-area" margin="true">
+                        <filter id="genericFilter"
+                                datasource="callDs">
+                            <properties include=".*"
+                                        exclude="template|templateName|createdBy
+                                            |regNo|regDate|id|jbpmProcessId
+                                            |createTs|docOfficeData|docKind
+                                            |docCategory|category|locState
+                                            |description|state|"/>
+                        </filter>
+                    </vbox>
+                        <checkBox id="hideResolutions" caption="msg://hideResolutions" align="MIDDLE_CENTER" visible="false"/>
+                </row>
+            </rows>
+          </grid>
+            <split id="split" orientation="vertical" pos="70">
+                <vbox id="table-panel" expand="callTable" spacing="true">
+                    <groupTable id="callTable" editable="false">
+                        <actions>
+                            <action id="edit"/>
+                            <action id="remove"/>
+                            <action id="excel"/>
+                            <action id="refresh"/>
+                        </actions>
+                        <buttonsPanel>
+                            <popupButton id="createButton" icon="icons/create.png" caption="msg://actions.Create"/>
+                            <button action="callTable.edit"/>
+                            <button action="callTable.refresh"/>
+                            <button action="callTable.remove" icon="icons/remove.png"/>
+                            <!--<button action="callTable.excel"/>-->
+                        </buttonsPanel>
+                        <rowsCount/>
+                        <columns>
+                            <column id="number"/>
+                            <column id="name"/>
+                            <column id="telephoneNumber"/>
+                            <column id="extClient"/>
+                            <column id="priority"/>
+                            <column id="callDescription"/>
+                            <column id="finishDatePLan"/>
+                            <column id="locState"/>
+                            <column id="comment"/>
+                            <column id="hasAttachments"/>
+                        </columns>
+                        <rows datasource="callDs"/>
+                    </groupTable>
+                </vbox>
+                <tabsheet id="tabsheet">
+                    <tab id="resolutionsTab" caption="msg://resolutions" margin="true">
+                        <iframe id="resolutionsFrame" src="/com/haulmont/workflow/web/ui/base/resolutions-frame.xml"/>
+                    </tab>
+                    <tab id="hierarchyTab" caption="msg://hierarchy" margin="true">
+                        <iframe id="cardTreeFrame" src="/com/haulmont/taskman/web/ui/common/card-tree-frame.xml"/>
+                    </tab>
+                </tabsheet>
+            </split>
+        </vbox>
+    </layout>
+</window>

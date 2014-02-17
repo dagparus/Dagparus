@@ -1,0 +1,64 @@
+
+<dagParus:window
+        xmlns:dagParus= "http://www.haulmont.com/schema/cuba/gui/window.xsd"
+        class = "com.haulmont.ext.web.ui.Villa.VillaBrowser"
+        messagesPack = "com.haulmont.ext.web.ui.Villa"
+        caption = "msg://browserCaption"
+        lookupComponent = "villaTable"
+        >
+
+    <dagParus:dsContext>
+        <dagParus:collectionDatasource id = "villaDs"
+                                       class = "com.haulmont.ext.core.entity.Villa"
+                                       view = "browse">
+            <dagParus:query>
+                <![CDATA[
+                select v from ext$Villa v order by v.villaname
+            ]]>
+            </dagParus:query>
+        </dagParus:collectionDatasource>
+    </dagParus:dsContext>
+
+    <dagParus:layout expandLayout = "true">
+        <dagParus:vbox id = "table-panel"
+                       expand = "villaTable"
+                       spacing = "true"
+                       height = "100%">
+            <dagParus:filter id = "genericFilter"
+                             datasource = "villaDs"
+                             stylename = "edit-area">
+                <dagParus:properties include = ".*"
+                                     exclude = ""/>
+            </dagParus:filter>
+
+            <dagParus:hbox id="verificationactsPanel" align="MIDDLE_LEFT" spacing="true" margin="true">
+                <dagParus:button action="villaTable.create" icon="icons/create.png"/>
+                <dagParus:button action="villaTable.edit" icon="icons/edit.png"/>
+                <dagParus:button action="villaTable.remove" icon="icons/remove.png"/>
+                <dagParus:button action="villaTable.excel" icon="icons/excel.png"/>
+                <dagParus:button action="villaTable.refresh" icon="icons/refresh.png"/>
+            </dagParus:hbox>
+
+            <dagParus:table id = "villaTable"
+                            editable = "false">
+                <!--
+                <dagParus:buttonsPanel>
+                    <dagParus:button action="policemanTable.create" icon="icons/create.png"/>
+                    <dagParus:button action="policemanTable.edit" icon="icons/edit.png"/>
+                    <dagParus:button action="policemanTable.remove" icon="icons/remove.png"/>
+                    <dagParus:button action="policemanTable.excel" icon="icons/excel.png"/>
+                    <dagParus:button action="policemanTable.refresh" icon="icons/refresh.png"/>
+                </dagParus:buttonsPanel>
+                -->
+                <dagParus:rowsCount/>
+                <dagParus:columns>
+                    <dagParus:column id = "republic"/>
+                    <dagParus:column id = "aread"/>
+                    <dagParus:column id = "villaname"/>
+                    <!--<dagParus:column id = "individual"/>-->
+                </dagParus:columns>
+                <dagParus:rows datasource = "villaDs"/>
+            </dagParus:table>
+        </dagParus:vbox>
+    </dagParus:layout>
+</dagParus:window>

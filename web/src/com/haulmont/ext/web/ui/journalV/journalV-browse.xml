@@ -1,0 +1,50 @@
+<window xmlns="http://schemas.haulmont.com/cuba/3.3/window.xsd"
+        class = "com.haulmont.ext.web.ui.journalV.JournalVBrowser"
+        messagesPack = "com.haulmont.ext.web.ui.journalV"
+        caption = "msg://browserCaption"
+        lookupComponent = "journalVTable"
+        >
+    <dsContext>
+        <collectionDatasource id = "journalVDs"
+                              class = "com.haulmont.ext.core.entity.JournalV"
+                              view = "browse">
+            <query>
+                select o from ext$JournalV o
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <layout expandLayout = "true">
+        <vbox id = "table-panel"
+              expand = "journalVTable"
+              spacing = "true"
+              height = "100%">
+            <filter id = "genericFilter"
+                    datasource = "journalVDs"
+                    stylename = "edit-area">
+                <properties include = ".*"
+                            exclude = ""/>
+            </filter>
+            <hbox id="verificationactsPanel" align="MIDDLE_LEFT" spacing="true" margin="true">
+                <button action="journalVTable.create" icon="icons/create.png"/>
+                <button action="journalVTable.edit" icon="icons/edit.png"/>
+                <button action="journalVTable.remove" icon="icons/remove.png"/>
+                <button action="journalVTable.excel" icon="icons/excel.png"/>
+                <button action="journalVTable.refresh" icon="icons/refresh.png"/>
+            </hbox>
+
+            <table id = "journalVTable"
+                   editable = "false">
+                <rowsCount/>
+                <columns>
+                    <column id="numberJV"/>
+                    <column id = "dateJV"/>
+                    <column id = "someone"/>
+                    <column id = "contentV"/>
+                    <column id = "contactJV"/>
+                    <column id = "statusV"/>
+                </columns>
+                <rows datasource = "journalVDs"/>
+            </table>
+        </vbox>
+    </layout>
+</window>

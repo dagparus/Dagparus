@@ -1,0 +1,163 @@
+<window
+        xmlns="http://www.haulmont.com/schema/cuba/gui/window.xsd"
+        xmlns:chart="http://www.haulmont.com/schema/charts/gui/charts.xsd"
+        class="com.haulmont.ext.web.ui.TaskRequest.TaskRequestBrowser"
+        messagesPack="com.haulmont.ext.web.ui.TaskRequest"
+        extends = "/com/haulmont/taskman/web/ui/task/task-browse.xml"
+        >
+
+    <dsContext>
+        <groupDatasource id="taskRequestsDs" class="com.haulmont.ext.core.entity.TaskRequest" view="browse">
+            <datasourceClass>com.haulmont.taskman.web.ui.TaskDatasource</datasourceClass>
+            <query>
+                <![CDATA[
+                    select distinct t from ext$TaskRequest t where t.id <> :param$exclItem <#if param$taskGroupLookup?has_content>and t.taskGroup is null</#if>
+                     <#if TaskGroupTaskFrame?has_content> and t.id not in (:param$TaskGroupTaskFrame) </#if>
+                     <#if SelectPrimaryTask?has_content> and t.state not in (',Finished,', ',Canceled,',',FinishedByInitiator,') </#if>
+                    order by t.num desc
+                ]]>
+            </query>
+        </groupDatasource>
+        <collectionDatasource id="ganttChartDs" class="com.haulmont.charts.core.entity.GanttChartItem" view="_local"
+                              refreshMode="NEVER">
+        </collectionDatasource>
+    </dsContext>
+    <#assign widthMin = 100>
+    <#assign width = 400>
+    <#assign buttonWidth=115>
+    <layout>
+        <vbox id="mainLayout" spacing="true" expand="split">
+            <grid spacing="true">
+                <columns>
+                    <column flex="1"/>
+                    <column flex="1"/>
+                    <column flex="1"/>
+                    <column flex="1"/>
+                </columns>
+                <rows>
+                    <row>
+                        <vbox margin="true" stylename="edit-area">
+                            <filter id="genericFilter" datasource="taskRequestsDs">
+                                <properties include=".*"
+                                            exclude="(deleteTs)|(deletedBy)|(jbpmProcessId)|(overdueNotified)|(updateTs)|(updatedBy)|(id)|(createTs)|(overdue)|(controlEnabled)|(controlEnabled)|(createDateDayRes)|(currentActor)|(hidden)|(substitutedCreator)|(creator)|(state)|(notified)|(createdBy)|(description)|(finishDatePlan)|(finishDateTimeFact)|(createDateTime)|(locState)|(important)|(cardUserInfo)|(category)
+                                        (parentCardAccess)"/>
+                                <property name="substitutedCreator" caption="msg://Task.substitutedCreator"/>
+                                <custom name="taskActor" caption="msg://filter.taskActor" join="join t.roles r"
+                                        paramClass="com.haulmont.cuba.security.entity.User">
+                                    r.user.id = ?
+                                </custom>
+                                <custom name="taskRole" caption="msg://filter.taskRole" join="join t.roles r"
+                                        paramClass="com.haulmont.workflow.core.entity.ProcRole"
+                                        paramWhere="t.proc.jbpmProcessKey = 'TaskManagement'">
+                                    r.procRole.id = ?
+                                </custom>
+                                <custom name="taskProject" caption="msg://Task.project" join="join t.projects p"
+                                        paramClass="com.haulmont.taskman.core.entity.Project">
+                                    p.name.id = ?
+                                </custom>
+                                <custom name="taskState" caption="msg://Task.state"
+                                        paramClass="com.haulmont.taskman.core.enums.TaskState">
+                                    t.state like ?
+                                </custom>
+                                <custom name="taskOverdued" caption="msg://taskOverdued">
+                                    @between(t.finishDateTimePlan,now-1000000000,now,second)
+                                </custom>
+                                <custom name="taskInWork" caption="msg://taskInWork">
+                                    (t.state like '%,InWork,%' or t.state like '%,Assigned,%')
+                                </custom>
+                                <custom name="taskWithMe" caption="msg://taskWithMe" join="join t.roles r">
+                                    r.user.id = :session$userId
+                                </custom>
+                                <custom name="taskBelongsToGroup" caption="msg://taskBelongsToGroup"
+                                        paramClass="com.haulmont.taskman.core.entity.TaskGroup">
+                                    t.id in (select tgt.task.id from tm$TaskGroupTask tgt where tgt.taskGroup.id = ?)
+                                </custom>
+                                <custom name="important" caption="msg://important"
+                                        paramClass="java.lang.Boolean">
+                                    ((select distinct cu.important from wf$CardUserInfo cu where cu.card.id = t.id
+                                    and cu.user.id =:session$userId and cu.deleteTs is null) = ?)
+                                    or
+                                    (false=? and not exists (select cu from wf$CardUserInfo cu where cu.card.id = t.id
+                                    and cu.user.id =:session$userId
+                                    and cu.important = true and cu.deleteTs is null))
+                                </custom>
+                            </filter>
+                        </vbox>
+                        <linkButton id="showGanttChart" icon="icons/gantt_chart_view.png?1" align="MIDDLE_CENTER"/>
+                        <checkBox id="hideResolutions" caption="msg://hideResolutions" align="MIDDLE_CENTER"/>
+                        <button id="ganttChartRefresh" icon="icons/refresh.png" align="MIDDLE_CENTER"/>
+                    </row>
+                </rows>
+            </grid>
+
+            <split id="split" orientation="vertical" pos="60" expand="table-panel">
+                <vbox id="table-panel" expand="tasksTable" spacing="true">
+                    <groupTable id="tasksTable" editable="false" presentations="true">
+                        <buttonsPanel id="buttonsPanel">
+                            <popupButton id="create" icon="icons/create.png" caption="msg://actions.Create"
+                                         width="${widthMin}" menuWidth="${buttonWidth}"/>
+                            <button action="tasksTable.edit" icon="icons/edit.png"/>
+                            <button action="tasksTable.remove" icon="icons/remove.png"/>
+                            <button id="excel" action="tasksTable.excel" icon="icons/excel.png"/>
+                            <popupButton id="print" icon="icons/print.png"/>
+                            <button action="tasksTable.refresh" icon="icons/refresh.png"/>
+                            <button action="tasksTable.saveAsTemplate"/>
+                            <button action="tasksTable.expandCollapseTrigger" id="expandCollapseTrigger"/>
+
+                        </buttonsPanel>
+                        <rowsCount/>
+                        <columns>
+                            <column id="hasAttachments" caption="msg://Task.hasAttachments" width="${30}">
+                                <formatter class="com.haulmont.docflow.web.ui.formatter.HasAttachmentsFormatter"/>
+                            </column>
+                            <column id="important" caption="msg://Task.important" width="${30}">
+                                <formatter class="com.haulmont.docflow.web.ui.formatter.ImportantFormatter"/>
+                            </column>
+                            <column id="createDate" caption="msg://Task.createDate" width="${widthMin}">
+                                <formatter class="com.haulmont.cuba.gui.components.formatters.DateFormatter"
+                                           format="msg://dateFormat"/>
+                            </column>
+                            <column id="num" caption="msg://Task.num"/>
+                            <column id="taskName" caption="msg://Task.taskName" width="${width}"/>
+                            <column id="fullDescr" caption="msg://Task.fullDescr" width="${width}"/>
+                            <column id="currentActor.name" caption="msg://Task.currentActor"/>
+                            <column id="percentCompletion" caption="msg://Task.percentCompletion"/>
+                            <column id="locState" caption="msg://Task.state"/>
+                            <column id="finishDateTimePlan" caption="msg://Task.finishDateTimePlan">
+                                <formatter class="com.haulmont.cuba.gui.components.formatters.DateFormatter"
+                                           format="msg://dateTimeFormat"/>
+                            </column>
+                            <column id="finishDateFact" caption="msg://Task.finishDateFact">
+                                <formatter class="com.haulmont.cuba.gui.components.formatters.DateFormatter"
+                                           format="msg://dateFormat"/>
+                            </column>
+                            <column id="priority" caption="msg://Priority"/>
+                            <column id="initiator.name" caption="msg://Task.initiator"/>
+                            <column id="executor.name" caption="msg://Task.executor"/>
+                            <column id="taskType" caption="msg://TaskType"/>
+                            <column id="parentCard" caption="msg://Task.parentCard"/>
+                            <column id="labourHour" caption="msg://Task.labourHour"/>
+                            <column id="hasAttributes" caption="msg://Task.hasAttributes">
+                                <formatter class="com.haulmont.docflow.web.ui.formatter.HasAttributesFormatter"/>
+                            </column>
+                        </columns>
+                        <rows datasource="taskRequestsDs"/>
+                    </groupTable>
+                </vbox>
+                <tabsheet id="tabsheet">
+                    <tab id="resolutionsTab" caption="msg://resolutions" margin="true">
+                        <iframe id="resolutionsFrame" src="/com/haulmont/workflow/web/ui/base/resolutions-frame.xml"/>
+                    </tab>
+                    <tab id="hierarchyTab" caption="msg://hierarchy" margin="true">
+                        <iframe id="cardTreeFrame" src="/com/haulmont/taskman/web/ui/common/card-tree-frame.xml"/>
+                    </tab>
+                </tabsheet>
+            </split>
+            <split id="splitGantt" orientation="vertical" pos="1">
+                <vbox/>
+                <chart:ganttChart id="ganttChart" vendor="jsgantt" datasource="ganttChartDs" visible="false"/>
+            </split>
+        </vbox>
+
+    </layout>
+</window>

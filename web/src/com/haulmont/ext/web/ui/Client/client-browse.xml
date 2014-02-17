@@ -1,0 +1,52 @@
+<window xmlns="http://schemas.haulmont.com/cuba/3.3/window.xsd"
+        class = "com.haulmont.ext.web.ui.Client.ClientBrowser"
+        messagesPack = "com.haulmont.ext.web.ui.Client"
+        caption = "msg://browserCaption"
+        lookupComponent = "clientTable"
+        >
+    <dsContext>
+        <collectionDatasource id = "clientDs"
+                              class = "com.haulmont.ext.core.entity.ExtClient"
+                              view = "browse">
+            <query>
+                select o from ext$Client o
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <layout expandLayout = "true">
+        <vbox id = "table-panel"
+              expand = "clientTable"
+              spacing = "true"
+              height = "100%">
+            <filter id = "genericFilter"
+                    datasource = "clientDs"
+                    stylename = "edit-area">
+                <properties include = ".*"
+                            exclude = ""/>
+            </filter>
+            <hbox id="verificationactsPanel" align="MIDDLE_LEFT" spacing="true" margin="true">
+                <button action="clientTable.create" icon="icons/create.png"/>
+                <button action="clientTable.edit" icon="icons/edit.png"/>
+                <button action="clientTable.remove" icon="icons/remove.png"/>
+                <button action="clientTable.excel" icon="icons/excel.png"/>
+                <button action="clientTable.refresh" icon="icons/refresh.png"/>
+            </hbox>
+
+            <table id = "clientTable"
+                   editable = "false">
+                <rowsCount/>
+                <columns>
+                    <column id = "name"/>
+                    <column id = "post"/>
+                    <column id = "numberTel"/>
+                    <column id = "numberTw"/>
+                    <column id = "nameCw"/>
+                    <column id = "mail"/>
+                    <column id = "address"/>
+
+                </columns>
+                <rows datasource = "clientDs"/>
+            </table>
+        </vbox>
+    </layout>
+</window>

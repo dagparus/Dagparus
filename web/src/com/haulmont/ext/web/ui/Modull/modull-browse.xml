@@ -1,0 +1,50 @@
+<window xmlns="http://schemas.haulmont.com/cuba/3.3/window.xsd"
+        class = "com.haulmont.ext.web.ui.Modull.ModullBrowser"
+        messagesPack = "com.haulmont.ext.web.ui.Modull"
+        caption = "msg://browserCaption"
+        lookupComponent = "modullTable"
+        >
+    <dsContext>
+        <collectionDatasource id = "modullDs"
+                              class = "com.haulmont.ext.core.entity.ExtModull"
+                              view = "browse">
+            <query>
+                <![CDATA[
+                select m from ext$Modull m order by m.name
+            ]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+
+    <layout expandLayout = "true">
+        <vbox id = "table-panel"
+              expand = "modullTable"
+              spacing = "true"
+              height = "100%">
+            <filter id = "genericFilter"
+                    datasource = "modullDs"
+                    stylename = "edit-area">
+                <properties include = ".*"
+                            exclude = ""/>
+            </filter>
+            <hbox id="verificationactsPanel" align="MIDDLE_LEFT" spacing="true" margin="true">
+                <button action="modullTable.create" icon="icons/create.png"/>
+                <button action="modullTable.edit" icon="icons/edit.png"/>
+                <button action="modullTable.remove" icon="icons/remove.png"/>
+                <button action="modullTable.refresh" icon="icons/refresh.png"/>
+            </hbox>
+
+            <table id = "modullTable">
+                <rowsCount/>
+                <columns>
+                    <column id="name"/>
+                    <column id="nameContract"/>
+                    <column id="price" editable="true"/>
+                    <column id="count" editable = "true"/>
+                    <column id="total"/>
+                </columns>
+                <rows datasource = "modullDs"/>
+            </table>
+        </vbox>
+    </layout>
+</window>

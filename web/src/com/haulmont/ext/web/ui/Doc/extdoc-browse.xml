@@ -1,0 +1,21 @@
+<window extends="/com/haulmont/docflow/web/ui/doc/doc-browse.xml"
+        >
+    <dsContext>
+        <groupDatasource id="docsDs" class="com.haulmont.docflow.core.entity.Doc" view="browse">
+            <datasourceClass>com.haulmont.docflow.web.ui.DocDatasource</datasourceClass>
+            <query>
+                <![CDATA[select distinct d from df$Doc d
+                where d.id <> :param$exclItem
+                and d.template = false
+                and d.versionOf is null
+                and d.docKind.docType.name <> 'ext$Call'
+                order by d.dateTime]]>
+                <filter>
+                    <and>
+                        <c>d.docOfficeDocKind = :param$docOfficeDocKind</c>
+                    </and>
+                </filter>
+            </query>
+        </groupDatasource>
+    </dsContext>
+</window>

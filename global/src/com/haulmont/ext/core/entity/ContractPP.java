@@ -1,0 +1,140 @@
+package com.haulmont.ext.core.entity;
+
+
+import com.haulmont.chile.core.annotations.Aggregation;
+import com.haulmont.chile.core.annotations.NamePattern;
+import com.haulmont.cuba.core.entity.annotation.Listeners;
+import com.haulmont.cuba.core.entity.annotation.TrackEditScreenHistory;
+import com.haulmont.cuba.security.entity.UserRole;
+import com.haulmont.docflow.core.entity.Company;
+import com.haulmont.docflow.core.entity.Doc;
+
+import javax.persistence.*;
+import java.util.Date;
+import java.util.LinkedHashSet;
+
+@Entity(name = "ext$ContractPP")
+@Table(name = "EXT_CONTRACTPP")
+@DiscriminatorValue("112")
+@PrimaryKeyJoinColumn(name = "CARD_ID", referencedColumnName = "CARD_ID")
+@Listeners("com.haulmont.docflow.core.listeners.DocEntityListener")
+@NamePattern("%s|number")
+@TrackEditScreenHistory
+public class ContractPP extends Doc {
+    private static final long serialVersionUID = -5772794459098915083L;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "COMPANY_ID")
+    protected CompanyExt extCompany;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CLIENT_ID")
+    protected ExtClient client;
+
+    @OneToMany(mappedBy = "contractPP")
+    @Aggregation
+    protected LinkedHashSet<ContractppModull> modull;
+
+    public LinkedHashSet<ContractppModull> getModull() {
+        return modull;
+    }
+
+    public void setModull(LinkedHashSet<ContractppModull> modull) {
+        this.modull = modull;
+    }
+
+    public CompanyExt getExtCompany() {
+        return extCompany;
+    }
+
+    public void setExtCompany(CompanyExt extCompany) {
+        this.extCompany = extCompany;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "HEAD_ID")
+    protected ExtHead head;
+
+    public ExtHead getHead() {
+        return head;
+    }
+
+    public void setHead(ExtHead head) {
+        this.head = head;
+    }
+
+    @Column (name ="NUMBER")
+    private String number;
+
+    @Column (name = "DATE_CONTR")
+    private Date dateContr;
+
+    @Column (name = "AMOUNT")
+    private String amount;
+
+    public String getTextAmount() {
+        return textAmount;
+    }
+
+    public void setTextAmount(String textAmount) {
+        this.textAmount = textAmount;
+    }
+
+    @Column (name = "TEXTAMOUNT")
+    private String textAmount;
+
+    public Villa getVilla() {
+        return villa;
+    }
+
+    public void setVilla(Villa villa) {
+        this.villa = villa;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VILLA_ID")
+    protected Villa villa;
+
+    @Column (name = "NAMECONTRACT")
+    private String nameContract;
+
+    public String getNameContract() {
+        return nameContract;
+    }
+
+    public void setNameContract(String nameContract) {
+        this.nameContract = nameContract;
+    }
+
+    public ExtClient getClient() {
+        return client;
+    }
+
+    public void setClient(ExtClient client) {
+        this.client = client;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public Date getDateContr() {
+        return dateContr;
+    }
+
+    public void setDateContr(Date dateContr) {
+        this.dateContr = dateContr;
+    }
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+}

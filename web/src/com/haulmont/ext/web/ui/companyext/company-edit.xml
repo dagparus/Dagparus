@@ -1,0 +1,99 @@
+<window
+        xmlns:ext="http://www.haulmont.com/schema/cuba/gui/window-ext.xsd"
+        xmlns="http://schemas.haulmont.com/cuba/3.1/window.xsd"
+        extends="/com/haulmont/docflow/web/ui/company/company-edit.xml"
+        class="com.haulmont.ext.web.ui.companyext.CompanyExtEditor"
+        >
+    <dsContext>
+        <datasource id="companyDs"
+                    class="com.haulmont.ext.core.entity.CompanyExt"
+                    view="edit"/>
+
+        <collectionDatasource id="republicDs"
+                              class="com.haulmont.ext.core.entity.Republic"
+                              view="_local"/>
+        <collectionDatasource id="areadDs"
+                              class="com.haulmont.ext.core.entity.Aread"
+                              view="_local"/>
+        <collectionDatasource id="villaDs"
+                              class="com.haulmont.ext.core.entity.Villa"
+                              view="_local"/>
+        <collectionDatasource id="companyDsLookup"
+                              class="com.haulmont.ext.core.entity.CompanyExt"
+                              view="edit">
+        <query>
+            <![CDATA[select e from df$Company e where not e.id = :param$item]]>
+        </query>
+        </collectionDatasource>
+
+        <collectionDatasource id="parentExtCompanysDs" class="com.haulmont.ext.core.entity.CompanyExt" view="browse">
+            <query>
+                <![CDATA[select e from ext$CompanyExt e where (not e.id = :param$item) and e.republic.id = :param$republic]]>
+            </query>
+        </collectionDatasource>
+     </dsContext>
+    <#assign width=280>
+    <layout>
+        <tabsheet id="tabsheet">
+            <tab id="mainTab">
+                <scrollbox>
+                    <vbox>
+                        <grid id="grid">
+                            <rows>
+                                <row ext:index="2">
+                                    <label value="Республика"/>
+                                    <actionsField id = "republic"
+                                                  property="republic"
+                                                  datasource="companyDs"
+                                                  optionsDatasource="republicDs"
+                                                  lookupScreen="ext$Republic.browse"
+                                                  width="${width}"
+                                                  required = "true"
+                                                  dropdown="true"
+                                                  lookup="true"
+                                                  open="true"/>
+                                </row>
+
+                                <row ext:index="3">
+                                    <label value="Район"/>
+                                    <actionsField id = "aread"
+                                                  property="aread"
+                                                  datasource="companyDs"
+                                                  optionsDatasource="areadDs"
+                                                  lookupScreen="ext$Aread.browse"
+                                                  width="${width}"
+                                                  required = "false"
+                                                  dropdown="true"
+                                                  lookup="true"
+                                                  open="true"/>
+                                </row>
+                                <row ext:index="4">
+                                    <label value="Населенный пункт"/>
+                                    <actionsField id = "villa"
+                                                  property="villa"
+                                                  datasource="companyDs"
+                                                  optionsDatasource="villaDs"
+                                                  lookupScreen="ext$Villa.browse"
+                                                  width="${width}"
+                                                  required = "false"
+                                                  dropdown="true"
+                                                  lookup="true"
+                                                  open="true"/>
+                                </row>
+                                <row ext:index="5">
+                                    <label value="Родительское подразделение"/>
+                                    <pickerField id="parentCompanyExt"
+                                                 datasource="companyDs"
+                                                 property="parentCompanyExt"
+                                                 optionsDatasource="parentExtCompanysDs"
+                                                 width="${width}"/>
+                                </row>
+
+                            </rows>
+                        </grid>
+                    </vbox>
+                </scrollbox>
+            </tab>
+        </tabsheet>
+    </layout>
+</window>

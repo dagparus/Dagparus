@@ -1,0 +1,85 @@
+<window
+        xmlns = "http://www.haulmont.com/schema/cuba/gui/window.xsd"
+        class = "com.haulmont.ext.web.ui.Modull.ModullEditor"
+        caption = "msg://editorCaption"
+        datasource = "modullDs"
+        messagesPack = "com.haulmont.ext.web.ui.Modull"
+        focusComponent = "fieldGroup">
+
+    <dsContext>
+        <datasource id = "modullDs"
+                    class = "com.haulmont.ext.core.entity.ExtModull"
+                    view = "edit"/>
+    </dsContext>
+
+    <#assign width = 300>
+    <layout expand = "windowActions">
+        <vbox spacing = "true">
+
+            <grid id="grid" margin="true" spacing="true" expandable="false" stylename="edit-area">
+                <columns>
+                    <column flex="1"/>
+                    <column flex="1"/>
+                </columns>
+                <rows>
+                    <row>
+                        <label id="name"
+                               value="msg://name"/>
+                        <textField id="name"
+                                   datasource="modullDs"
+                                   property="name"
+                                   width="${width}"/>
+
+                    </row>
+                    <row>
+                        <label id="nameContract"
+                               value="msg://nameContract"/>
+                        <textField id="nameContract"
+                                   datasource="modullDs"
+                                   property="nameContract"
+                                   width="${width}"/>
+
+                    </row>
+                    <row>
+                        <label id="count"
+                               value="msg://count"/>
+                        <textField id="count"
+                                   datasource="modullDs"
+                                   property="count"
+                                   width="${width}"/>
+                    </row>
+                    <row>
+                        <label id="price"
+                               value="msg://price"/>
+                        <textField id="price"
+                                   datasource="modullDs"
+                                   property="price"
+                                   width="${width}"/>
+                    </row>
+                   <!-- <row>
+                        <label id="totalCost"
+                               value="msg://totalCost"/>
+                        <textField id="totalCost"
+                                   datasource="modullDs"
+                                   property="totalCost"
+                                   width="${width}"/>
+                    </row>      -->
+
+                    <row>
+                        <label id="total"
+                               value="msg://total"/>
+                        <textField id="total"
+                                   datasource="modullDs"
+                                   property="total"
+                                   width="${width}"/>
+
+                    </row>
+
+                </rows>
+
+            </grid>
+        </vbox>
+        <iframe id = "windowActions"
+                src = "/com/haulmont/cuba/gui/edit-window.actions.xml"/>
+    </layout>
+</window>

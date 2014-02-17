@@ -1,0 +1,172 @@
+<window
+        xmlns="http://schemas.haulmont.com/cuba/3.3/window.xsd"
+        class = "com.haulmont.ext.web.ui.Head.HeadEditor"
+        caption = "msg://editorCaption"
+        datasource = "HeadDs"
+        messagesPack = "com.haulmont.ext.web.ui.Head">
+
+    <dsContext>
+        <datasource id = "HeadDs"
+                    class = "com.haulmont.ext.core.entity.ExtHead"
+                    view = "edit"/>
+        <collectionDatasource id="companyDs"
+                              class="com.haulmont.ext.core.entity.CompanyExt"
+                              view="edit"/>
+
+        <collectionDatasource id="areadDs"
+                              class="com.haulmont.ext.core.entity.Aread"
+                              view="_local">
+
+            <query>
+                select s from ext$Aread s order by s.areadname
+            </query>
+        </collectionDatasource>
+
+     </dsContext>
+
+
+<layout expand = "windowActions">
+    <tabsheet id="tabsheet">
+      <tab id="main" caption="Главное" margin="true">
+       <vbox>
+           <grid id="grid" margin="true" spacing="true" expandable="false" stylename="edit-area">
+           <columns>
+               <column flex="1"/>
+               <column flex="1"/>
+           </columns>
+        <rows>
+        <row>
+        <label value="msg://surname"/>
+        <textField id="surname"
+                   datasource="HeadDs"
+                   property="surname"
+                   width="300"/>
+        </row>
+        <row>
+        <label value="msg://nameh"/>
+        <textField id="nameh"
+                      datasource="HeadDs"
+                      property="nameh"
+                      width="300"/>
+        </row>
+        <row>
+        <label value="msg://patronymic"/>
+        <textField id = "patronymic"
+                   datasource="HeadDs"
+                   property="patronymic"
+                   width="300"/>
+        </row>
+        <row>
+        <label value="msg://name"/>
+       <textField id="name"
+                  datasource="HeadDs"
+                  property="name"
+                  width="300"/>
+        </row>
+        <row>
+         <label value="msg://post"/>
+        <textField id = "post"
+                   datasource="HeadDs"
+                   property="post"
+                   width="300"/>
+        </row>
+            <row>
+                <label value="msg://company"/>
+                <actionsField id = "company"
+                              datasource="HeadDs"
+                              property="company"
+                              required = "false"
+                              optionsDatasource="companyDs"
+                              lookupScreen="df$Company.browse"
+                              width="300"
+                              dropdown="true"
+                              lookup="true"
+                              open="true"/>
+            </row>
+       <row>
+       <label value="msg://aread"/>
+       <actionsField id = "aread"
+                     property="aread"
+                     datasource="HeadDs"
+                     optionsDatasource="areadDs"
+                     lookupScreen="ext$Aread.browse"
+                     width="300"
+                     dropdown="true"
+                     lookup="true"
+                     open="true"/>
+       </row>
+        <row>
+        <label value="msg://numberTel"/>
+        <textField id = "numberTel"
+                   datasource="HeadDs"
+                   property="numberTel"
+                   width="300"/>
+        </row>
+       <row>
+       <label value="msg://faxs"/>
+       <textField id = "faxs"
+                  datasource="HeadDs"
+                  property="faxs"
+                  required="false"
+                  width="300"/>
+       </row>
+       <row>
+       <label value="msg://email"/>
+       <textField id = "email"
+                  datasource="HeadDs"
+                  property="email"
+                  required="false"
+                  width="300"/>
+       </row>
+       <row>
+       <label value="msg://dateBirth"/>
+       <dateField id = "dateBirth"
+                  property="dateBirth"
+                  datasource="HeadDs"
+                  dateFormat="dd.MM.yyyy"
+                  required = "false"/>
+       </row>
+       <row>
+        <label value="Пол"/>
+        <optionsGroup id="sex"
+                      datasource="HeadDs"
+                      property="sex"/>
+       </row>
+        </rows>
+      </grid>
+     </vbox>
+     <iframe id = "windowActions"
+             src = "/com/haulmont/cuba/gui/edit-window.actions.xml"/>
+
+        </tab>
+
+        <tab id="declension" caption="Склонение Ф И О" margin="true" index="1">
+            <vbox expand="y">
+
+                <label value="msg://surnameR"/>
+                <textField id="surnameR"
+                           datasource="HeadDs"
+                           property="surnameR"
+                           width="300"/>
+
+                <label value="msg://nameR"/>
+                <textField id="nameR"
+                           datasource="HeadDs"
+                           property="nameR"
+                           width="300"/>
+
+                <label value="msg://patronymicR"/>
+                <textField id = "patronymicR"
+                           datasource="HeadDs"
+                           property="patronymicR"
+                           width="300"/>
+
+            </vbox>
+               <iframe id = "windowActions"
+                        src = "/com/haulmont/cuba/gui/edit-window.actions.xml"/>
+            <vbox id="y"/>
+            </tab>
+
+        </tabsheet>
+    </layout>
+</window>

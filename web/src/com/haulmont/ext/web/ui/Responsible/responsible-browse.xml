@@ -1,0 +1,50 @@
+<window xmlns="http://schemas.haulmont.com/cuba/3.3/window.xsd"
+        class = "com.haulmont.ext.web.ui.Responsible.ResponsibleBrowser"
+        messagesPack = "com.haulmont.ext.web.ui.Responsible"
+        caption = "msg://browserCaption"
+        lookupComponent = "responsibleTable"
+        >
+    <dsContext>
+        <collectionDatasource id = "responsibleDs"
+                              class = "com.haulmont.ext.core.entity.Responsible"
+                              view = "browse">
+            <query>
+                select o from ext$Responsible o
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <layout expandLayout = "true">
+        <vbox id = "table-panel"
+              expand = "responsibleTable"
+              spacing = "true"
+              height = "100%">
+            <filter id = "genericFilter"
+                    datasource = "responsibleDs"
+                    stylename = "edit-area">
+                <properties include = ".*"
+                            exclude = ""/>
+            </filter>
+            <hbox id="verificationactsPanel" align="MIDDLE_LEFT" spacing="true" margin="true">
+                <button action="responsibleTable.create" icon="icons/create.png"/>
+                <button action="responsibleTable.edit" icon="icons/edit.png"/>
+                <button action="responsibleTable.remove" icon="icons/remove.png"/>
+                <button action="responsibleTable.excel" icon="icons/excel.png"/>
+                <button action="responsibleTable.refresh" icon="icons/refresh.png"/>
+            </hbox>
+
+            <table id = "responsibleTable"
+                   editable = "false">
+                <rowsCount/>
+                <columns>
+                    <column id = "republic"/>
+                    <column id = "aread"/>
+                    <column id = "villa"/>
+                    <column id = "responsible"/>
+                    <column id = "numberTel"/>
+                    <column id = "post"/>
+                </columns>
+                <rows datasource = "responsibleDs"/>
+            </table>
+        </vbox>
+    </layout>
+</window>

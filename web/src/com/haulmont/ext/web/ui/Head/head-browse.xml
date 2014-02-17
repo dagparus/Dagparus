@@ -1,0 +1,53 @@
+<window xmlns="http://schemas.haulmont.com/cuba/3.3/window.xsd"
+                 class = "com.haulmont.ext.web.ui.Head.HeadBrowser"
+                 messagesPack = "com.haulmont.ext.web.ui.Head"
+                 caption = "msg://browserCaption"
+                 lookupComponent = "headTable"
+        >
+<dsContext>
+    <collectionDatasource id = "headDs"
+                          class = "com.haulmont.ext.core.entity.ExtHead"
+                          view = "browse">
+        <query>
+            select o from ext$Head o
+        </query>
+    </collectionDatasource>
+</dsContext>
+<layout expandLayout = "true">
+    <vbox id = "table-panel"
+          expand = "headTable"
+          spacing = "true"
+          height = "100%">
+        <filter id = "genericFilter"
+                datasource = "headDs"
+                stylename = "edit-area">
+            <properties include = ".*"
+                        exclude = ""/>
+        </filter>
+        <hbox id="verificationactsPanel" align="MIDDLE_LEFT" spacing="true" margin="true">
+            <button action="headTable.create" icon="icons/create.png"/>
+            <button action="headTable.edit" icon="icons/edit.png"/>
+            <button action="headTable.remove" icon="icons/remove.png"/>
+            <button action="headTable.excel" icon="icons/excel.png"/>
+            <button action="headTable.refresh" icon="icons/refresh.png"/>
+        </hbox>
+
+        <table id = "headTable"
+               editable = "false">
+            <rowsCount/>
+            <columns>
+                <column id="name"/>
+                <column id = "surname"/>
+                <column id = "nameh"/>
+                <column id = "patronymic"/>
+                <column id= "company"/>
+                <column id = "post"/>
+                <column id = "aread"/>
+                <column id = "numberTel"/>
+                <column id = "email"/>
+            </columns>
+            <rows datasource = "headDs"/>
+        </table>
+    </vbox>
+</layout>
+</window>

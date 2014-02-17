@@ -1,0 +1,54 @@
+<screen-config>
+
+    <screen id="ext$JournalV.browse" template="com/haulmont/ext/web/ui/journalV/journalV-browse.xml"/>
+    <screen id="ext$JournalV.edit" template="com/haulmont/ext/web/ui/journalV/journalV-edit.xml"/>
+
+    <screen id="ext$JournalI.browse" template="com/haulmont/ext/web/ui/journalI/journalI-browse.xml"/>
+    <screen id="ext$JournalI.edit" template="com/haulmont/ext/web/ui/journalI/journalI-edit.xml"/>
+
+    <screen id="ext$ContractPP.browse" template="/com/haulmont/ext/web/ui/ContractPP/contractPP-browse.xml"/>
+    <screen id="ext$ContractPP.edit" template="/com/haulmont/ext/web/ui/ContractPP/contractPP-edit.xml"/>
+
+    <screen id="df$Company.browse" template="/com/haulmont/ext/web/ui/companyext/company-browse.xml"/>
+    <screen id="df$Company.edit" template="/com/haulmont/ext/web/ui/companyext/company-edit.xml"/>
+    <screen id="ext$CompanyExt.edit" template="/com/haulmont/ext/web/ui/companyext/company-edit.xml"/>
+
+    <screen id="ext$Head.browse" template="/com/haulmont/ext/web/ui/Head/head-browse.xml"/>
+    <screen id="ext$Head.edit" template="/com/haulmont/ext/web/ui/Head/head-edit.xml"/>
+
+    <screen id="ext$Modull.browse" template="/com/haulmont/ext/web/ui/Modull/modull-browse.xml"/>
+    <screen id="ext$Modull.edit" template="/com/haulmont/ext/web/ui/Modull/modull-edit.xml"/>
+
+    <screen id="ext$Responsible.browse" template="/com/haulmont/ext/web/ui/Responsible/responsible-browse.xml"/>
+    <screen id="ext$Responsible.edit" template="/com/haulmont/ext/web/ui/Responsible/responsible-edit.xml"/>
+
+    <screen id="ext$Client.browse" template="/com/haulmont/ext/web/ui/Client/client-browse.xml"/>
+    <screen id="df$Client.browse" template="/com/haulmont/ext/web/ui/Client/client-browse.xml"/>
+    <screen id="ext$Client.edit" template="/com/haulmont/ext/web/ui/Client/client-edit.xml"/>
+    <screen id="df$Client.edit" template="/com/haulmont/ext/web/ui/Client/client-edit.xml"/>
+
+    <screen id="ext$Aread.browse" template="/com/haulmont/ext/web/ui/Aread/aread-browser.xml"/>
+    <screen id="ext$Aread.edit" template="/com/haulmont/ext/web/ui/Aread/aread-editor.xml"/>
+
+    <screen id="ext$Republic.browse" template="/com/haulmont/ext/web/ui/Republic/republic-browser.xml"/>
+    <screen id="ext$Republic.edit" template="/com/haulmont/ext/web/ui/Republic/republic-editor.xml"/>
+
+    <screen id="ext$Villa.browse" template="/com/haulmont/ext/web/ui/Villa/villa-browser.xml"/>
+    <screen id="ext$Villa.edit" template="/com/haulmont/ext/web/ui/Villa/villa-editor.xml"/>
+
+    <screen id="ext$TaskRequest.edit" template="/com/haulmont/ext/web/ui/TaskRequest/taskRequestEditor.xml"/>
+    <screen id="ext$TaskRequest.browse" template="/com/haulmont/ext/web/ui/TaskRequest/taskRequestBrowser.xml"/>
+
+     <screen id="ext$Call.edit" template="/com/haulmont/ext/web/ui/Call/call-edit.xml"/>
+     <screen id="ext$Call.browse" template="/com/haulmont/ext/web/ui/Call/call-browse.xml"/>
+
+    <screen id="loadClients" template="/com/haulmont/ext/web/ui/load/load-browse.xml"/>
+
+
+    <screen id="ext$CompanyExt.browse" template="/com/haulmont/ext/web/ui/TreeCompany/companyExt-browse.xml"/>
+    <screen id="ext$CompanyExt.lookup" template="/com/haulmont/ext/web/ui/TreeCompany/companyExt-lookup.xml"/>
+
+   <!--  <screen id="tm$Task.browse" template="com/haulmont/ext/web/ui/Task/taskBrowser.xml"/>
+     <screen id="df$Doc.browse" template="/com/haulmont/ext/web/ui/Doc/extdoc-browse.xml"/>   -->
+
+    </screen-config>

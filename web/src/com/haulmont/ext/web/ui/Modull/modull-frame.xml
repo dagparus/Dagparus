@@ -1,0 +1,29 @@
+<!--
+  ~ Copyright (c) 2014 Haulmont Technology Ltd. All Rights Reserved.
+  ~ Haulmont Technology proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<window xmlns="http://www.haulmont.com/schema/cuba/gui/window.xsd"
+        class="com.haulmont.ext.web.ui.Modull.ModullFrame"
+        >
+
+    <layout expandLayout="true">
+        <vbox height="100%" margin="true" expand="modullTable" spacing="true">
+            <table id="modullTable" editable="false" multiselect="true">
+                <buttonsPanel>
+                    <button id="add" action="modullTable.add" icon="icons/create.png"/>
+                    <button id="delete" action="modullTable.remove" icon="icons/remove.png"/>
+                </buttonsPanel>
+                <columns>
+                    <column id="name" caption="msg://modullName"/>
+                    <column id="count" caption="msg://modullCount"/>
+                    <column id="price" caption="msg://modullPrice"/>
+                    <column id="total" caption="msg://modullTotal"/>
+                  <!--  <column id="totalCost" caption="msg://modullTotalCost"/>-->
+                </columns>
+                <rows datasource="modullDs"/>
+            </table>
+        </vbox>
+    </layout>
+</window>

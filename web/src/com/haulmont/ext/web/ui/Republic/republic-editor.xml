@@ -1,0 +1,49 @@
+<window
+        xmlns = "http://www.haulmont.com/schema/cuba/gui/window.xsd"
+        class = "com.haulmont.ext.web.ui.Republic.RepublicEditor"
+        caption = "msg://editorCaption"
+        datasource = "republicDs"
+        messagesPack = "com.haulmont.ext.web.ui.Republic"
+        focusComponent = "fieldGroup">
+
+    <dsContext>
+        <datasource id = "republicDs"
+                    class = "com.haulmont.ext.core.entity.Republic"
+                    view = "_local"/>
+    </dsContext>
+
+    <#assign width = 300>
+    <layout expand = "windowActions">
+        <vbox spacing = "true">
+
+            <grid id="grid" margin="true" spacing="true" expandable="false" stylename="edit-area">
+                <columns>
+                    <column flex="1"/>
+                    <column flex="1"/>
+                </columns>
+
+                <rows>
+                    <row>
+                        <label value="msg://regioncode"/>
+                        <textField id="regioncode"
+                                   datasource="republicDs"
+                                   property="regioncode"
+                                   width="${width}"
+                                   required = "false"/>
+                    </row>
+                    <row>
+                        <label value="msg://regionname"/>
+                        <textField id="regionname"
+                                   datasource="republicDs"
+                                   property="regionname"
+                                   width="${width}"
+                                   required = "true"/>
+                    </row>
+                </rows>
+
+            </grid>
+        </vbox>
+        <iframe id = "windowActions"
+                src = "/com/haulmont/cuba/gui/edit-window.actions.xml"/>
+    </layout>
+</window>

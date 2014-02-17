@@ -1,0 +1,195 @@
+<views xmlns="http://www.haulmont.com/schema/cuba/view.xsd">
+
+    <view class="com.haulmont.ext.core.entity.Call" name="browse" extends="_local">
+        <property name="extClient" view="_minimal"/>
+        <property name="priority" view="_minimal"/>
+        <property name="proc" view="_local"/>
+    </view>
+
+    <view class="com.haulmont.ext.core.entity.Call" name="edit" extends="_local">
+        <property name="extClient" view="_minimal"/>
+        <property name="priority" view="_minimal"/>
+    </view>
+
+    <view class="com.haulmont.ext.core.entity.Call" name="version" extends="_local">
+        <property name="extClient" view="_minimal"/>
+        <property name="priority" view="_minimal"/>
+    </view>
+
+    <view class="com.haulmont.ext.core.entity.TaskRequest" name="edit" extends="_local">
+        <property name="extClient" view="_minimal"/>
+        <property name="priority" view="_minimal"/>
+        <property name="taskType" view="_local"/>
+        <property name="proc" view="task-edit"/>
+        <property name="roles" view="card-edit" lazy="false"/>
+        <property name="attachments" view="card-edit" lazy="true"/>
+        <property name="parentCard" view="card-tree-for-parent"/>
+        <!--<property name="taskVersions" view="task-edit"/>-->
+        <property name="creator" view="user-minimal"/>
+        <property name="projects" view="_minimal"/>
+        <property name="executor" view="_local"/>
+        <property name="initiator" view="_local"/>
+        <property name="substitutedCreator" view="user-minimal"/>
+        <property name="primaryTask" view="_minimal"/>
+        <property name="dependentTasks" view="_minimal"/>
+        <property name="subCards" view="_minimal" lazy="true"/>
+        <property name="category" view="_minimal"/>
+    </view>
+
+    <view class="com.haulmont.ext.core.entity.TaskRequest" name="browse" extends="_local">
+        <property name="extClient" view="_minimal"/>
+        <property name="createTs"/>
+        <property name="proc" view="_local"/>
+        <property name="priority" view="_local"/>
+        <property name="taskType" view="_minimal"/>
+        <property name="parentCard" view="_minimal"/>
+        <property name="executor" view="_minimal"/>
+        <property name="initiator" view="_minimal"/>
+        <property name="substitutedCreator" view="user-minimal"/>
+        <property name="category" view="_minimal"/>
+    </view>
+
+    <view class="com.haulmont.ext.core.entity.ContractPP" name="browse" extends="_local">
+        <property name="extCompany" view="_minimal"/>
+        <property name="client" view="_minimal"/>
+        <property name="head" view="_minimal"/>
+        <property name="modull" view="_minimal"/>
+        <property name="villa" view="_minimal"/>
+    </view>
+
+    <view class="com.haulmont.ext.core.entity.ContractPP" name="edit" extends="_local">
+        <property name="procs" view="card-edit"
+                  lazy="true"/>
+        <property name="roles" view="card-edit"
+                  lazy="true"/>
+        <property name="projects" view="_minimal"/>
+        <property name="versionOf" view="_minimal"/>
+
+        <property name="extCompany" view="_minimal"/>
+        <property name="client" view="_minimal"/>
+        <property name="villa" view="_minimal"/>
+        <property name="head" view="_minimal"/>
+        <property name="modull" view="browse"/>
+
+        <property name="attachments"
+                  view="doc-edit"
+                  lazy="true"/>
+        <property name="parentCard"
+                  view="_minimal"/>
+        <property name="docKind"
+                  view="edit"/>
+
+    </view>
+
+    <view class="com.haulmont.ext.core.entity.ContractPP" name="version" extends="_local">
+        <property name="docKind" view="_minimal"/>
+        <property name="versionOf" view="_local"/>
+    </view>
+
+    <view class="com.haulmont.ext.core.entity.CompanyExt" name="browse" extends="_local">
+        <property name="republic" view="_minimal"/>
+        <property name="aread" view="_minimal"/>
+        <property name="villa" view="_minimal"/>
+        <property name="parentCompanyExt" view="_minimal"/>
+    </view>
+
+    <view class="com.haulmont.ext.core.entity.CompanyExt" name="edit" extends="_local">
+        <property name="republic" view="_minimal"/>
+        <property name="aread" view="_minimal"/>
+        <property name="villa" view="_minimal"/>
+        <property name="accounts" view="contractor-edit"/>
+        <property name="contactPersons" view="_local"/>
+        <property name="attachments" view="contractor-edit"/>
+        <property name="parentCompanyExt" view="_minimal"/>
+    </view>
+
+    <view class="com.haulmont.ext.core.entity.ExtHead" name="browse" extends="_local">
+        <property name="company" view="_minimal"/>
+    </view>
+
+    <view  class="com.haulmont.ext.core.entity.ExtHead" name="edit" extends="_local">
+        <property name="company" view="_minimal"/>
+    </view>
+
+    <view class="com.haulmont.ext.core.entity.Responsible" name="browse" extends="_local">
+        <property name="aread" view="_minimal"/>
+        <property name="republic" view="_minimal"/>
+        <property name="villa" view="_minimal"/>
+    </view>
+
+    <view  class="com.haulmont.ext.core.entity.Responsible" name="edit" extends="_local">
+        <property name="aread" view="_minimal"/>
+        <property name="republic" view="_minimal"/>
+        <property name="villa" view="_minimal"/>
+    </view>
+
+    <view class="com.haulmont.ext.core.entity.ExtClient" name="browse" extends="_local">
+        <property name="extCompany" view="_minimal"/>
+    </view>
+
+    <view  class="com.haulmont.ext.core.entity.ExtClient" name="edit" extends="_local">
+        <property name="extCompany" view="_minimal"/>
+    </view>
+
+    <view class="com.haulmont.ext.core.entity.Republic" name="browse" extends="_local">
+    </view>
+
+    <view class="com.haulmont.ext.core.entity.Republic" name="edit" extends="_local">
+    </view>
+
+    <view class="com.haulmont.ext.core.entity.Aread" name="browse" extends="_local">
+        <property name="republic" view="_minimal"/>
+    </view>
+
+    <view class="com.haulmont.ext.core.entity.Aread" name="edit" extends="_local">
+        <property name="republic" view="_minimal"/>
+    </view>
+
+    <view class="com.haulmont.ext.core.entity.Villa" name="browse" extends="_local">
+        <property name="aread" view="_minimal"/>
+        <property name="republic" view="_minimal"/>
+    </view>
+
+    <view class="com.haulmont.ext.core.entity.Villa" name="edit" extends="_local">
+        <property name="aread" view="_minimal"/>
+        <property name="republic" view="_minimal"/>
+    </view>
+
+    <view class="com.haulmont.ext.core.entity.JournalV" name="browse" extends="_local">
+    </view>
+
+    <view class="com.haulmont.ext.core.entity.JournalV" name="edit" extends="_local">
+    </view>
+
+    <view class="com.haulmont.ext.core.entity.JournalI" name="browse" extends="_local">
+    </view>
+
+    <view class="com.haulmont.ext.core.entity.JournalI" name="edit" extends="_local">
+    </view>
+
+    <view class="com.haulmont.ext.core.entity.ExtModull" name="browse" extends="_local">
+    </view>
+
+    <view class="com.haulmont.ext.core.entity.ExtModull" name="edit" extends="_local">
+    </view>
+
+    <view class="com.haulmont.ext.core.entity.ContractppModull" name="browse" extends="_local">
+        <property name="modull" view="browse">
+            <property name="name"/>
+            <property name="count"/>
+            <property name="price"/>
+            <property name="total"/>
+        </property>
+    </view>
+
+   <!-- <view entity="ext$ContractPP" name="contractPP.edit" extends="_local">
+        <property name="modull" view="contractPP.edit"/>
+    </view>
+
+    <view entity="ext$ContractppModull" name="contractPP.edit">
+        <property name="modull">
+            <property name="name"/>
+        </property>
+    </view> -->
+
+</views>

@@ -1,0 +1,138 @@
+<window
+        xmlns="http://schemas.haulmont.com/cuba/3.3/window.xsd"
+        class = "com.haulmont.ext.web.ui.Responsible.ResponsibleEditor"
+        caption = "msg://editorCaption"
+        datasource = "ResponsibleDs"
+        messagesPack = "com.haulmont.ext.web.ui.Responsible">
+
+    <dsContext>
+        <datasource id = "ResponsibleDs"
+                    class = "com.haulmont.ext.core.entity.Responsible"
+                    view = "edit"/>
+
+        <datasource id = "HeadDs"
+                    class = "com.haulmont.ext.core.entity.ExtHead"
+                    view = "_local"/>
+
+        <collectionDatasource id="republicDs"
+                              class="com.haulmont.ext.core.entity.Republic"
+                              view="_local">
+            <query>
+                select s from ext$Republic s order by s.regionname
+            </query>
+        </collectionDatasource>
+
+        <collectionDatasource id="areadDs"
+                              class="com.haulmont.ext.core.entity.Aread"
+                              view="_local">
+
+            <query>
+                select p from ext$Aread p where p.republic.id = :ds$ResponsibleDs.republic
+            </query>
+        </collectionDatasource>
+
+        <collectionDatasource id="villaDs"
+                              class="com.haulmont.ext.core.entity.Villa"
+                              view="_local">
+            <query>
+                select p from ext$Villa p where p.aread.id = :ds$ResponsibleDs.aread
+            </query>
+
+        </collectionDatasource>
+
+    </dsContext>
+
+
+    <layout expand = "windowActions">
+
+                <vbox>
+                        <label value="msg://republic"/>
+                        <actionsField id = "republic"
+                                      property="republic"
+                                      datasource="ResponsibleDs"
+                                      optionsDatasource="republicDs"
+                                      lookupScreen="ext$Republic.browse"
+                                      width="${300}"
+                                      required = "true"
+                                      dropdown="true"
+                                      open="true"
+                                      lookup="true"/>
+
+                        <label value="msg://aread"/>
+                        <actionsField id = "aread"
+                                      property="aread"
+                                      datasource="ResponsibleDs"
+                                      optionsDatasource="areadDs"
+                                      lookupScreen="ext$Aread.browse"
+                                      width="${300}"
+                                      required = "true"
+                                      dropdown="true"
+                                      open="true"
+                                      lookup="true"/>
+
+
+
+                    <label value="msg://villa"/>
+                    <actionsField id = "villa"
+                                 property="villa"
+                                 datasource="ResponsibleDs"
+                                 optionsDatasource="villaDs"
+                                 required = "true"
+                                 lookupScreen="ext$Villa.browse"
+                                 width="300"
+                                 dropdown="true"
+                                 open="true"
+                                 lookup="true"/>
+
+
+                                        <label value="msg://responsible"/>
+                                        <textField id = "responsible"
+                                                   datasource="ResponsibleDs"
+                                                   property="responsible"
+                                                   required = "true"
+                                                   width="300"/>
+
+                                       <label value="msg://post"/>
+                                        <textField id="post"
+                                                   datasource="ResponsibleDs"
+                                                   property="post"
+                                                   required="true"
+                                                   width="300"/>
+
+                                         <label value="msg://postalAdress"/>
+                                         <textField id = "postalAdress"
+                                                    datasource="ResponsibleDs"
+                                                    property="postalAdress"
+                                                    required = "false"
+                                                    width="300"
+                                                    rows="2"/>
+
+                                        <label value="msg://numberTel"/>
+                                        <textField id = "numberTel"
+                                                   datasource="ResponsibleDs"
+                                                   property="numberTel"
+                                                   required = "true"
+                                                   width="300"/>
+
+                                        <label value="msg://faxs"/>
+                                        <textField id = "faxs"
+                                                   datasource="ResponsibleDs"
+                                                   property="faxs"
+                                                   required = "false"
+                                                   width="300"/>
+
+                                        <label value="msg://eMail"/>
+                                        <textField id = "eMail"
+                                                   datasource="ResponsibleDs"
+                                                   property="eMail"
+                                                   required = "false"
+                                                   width="300"/>
+
+
+                </vbox>
+                <iframe id = "windowActions"
+                        src = "/com/haulmont/cuba/gui/edit-window.actions.xml"/>
+
+
+    </layout>
+</window>

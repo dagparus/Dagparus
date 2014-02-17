@@ -1,0 +1,69 @@
+<!--
+  ~ Copyright (c) 2014 Haulmont Technology Ltd. All Rights Reserved.
+  ~ Haulmont Technology proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<window
+        xmlns:dagParus= "http://www.haulmont.com/schema/cuba/gui/window.xsd"
+        class = "com.haulmont.ext.web.ui.load.Load"
+        messagesPack = "com.haulmont.ext.web.ui.load"
+        caption = "msg://browserCaption"
+        lookupComponent = "depTable"
+        >
+
+    <dsContext>
+
+    </dsContext>
+
+    <#assign width = 300>
+    <layout expand="tabsheet">
+        <tabsheet id="tabsheet">
+            <tab id="import" caption="msg://import" margin="true">
+                <scrollbox>
+                    <vbox spacing = "true">
+
+                        <grid id="grid" margin="true" spacing="true" expandable="false" stylename="edit-area">
+                            <columns>
+                                <column flex="1"/>
+                                <column flex="1"/>
+                            </columns>
+                            <rows>
+                             <!--   <row>
+                                    <label value="msg://department"/>
+                                    <lookupPickerField id="department"
+                                                       property="department"
+                                                       optionsDatasource="depDs"
+                                                       required = "true"
+                                                       width="${width}"/>
+                                </row>
+                                <row>
+                                    <label value="msg://verificationPeriod"/>
+                                    <lookupPickerField id="verificationPeriod"
+                                                       property="verificationPeriod"
+                                                       optionsDatasource="verificationPeriodDs"
+                                                       required = "true"
+                                                       width="${width}"/>
+                                </row>         -->
+                                <row>
+                                    <label value="msg://pathToCSV"/>
+                                    <textField id="pathToCSV" width="${width}" required = "true"/>
+                                </row>
+                                <!--   <row>
+                                       <label value="msg://codeRegion"/>
+                                       <textField id="codeRegion" width="${width}" required = "true"/>
+                                   </row>        -->
+                            </rows>
+                        </grid>
+
+                        <vbox id="importRecord">
+                            <label value="msg://importRecord"/>
+                        </vbox>
+
+                    </vbox>
+                </scrollbox>
+            </tab>
+
+        </tabsheet>
+    </layout>
+</window>

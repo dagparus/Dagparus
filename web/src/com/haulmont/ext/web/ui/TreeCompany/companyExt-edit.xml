@@ -1,0 +1,55 @@
+<!--
+  ~ Copyright (c) 2014 Haulmont Technology Ltd. All Rights Reserved.
+  ~ Haulmont Technology proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<window
+        xmlns="http://www.haulmont.com/schema/cuba/gui/window.xsd"
+        class="com.haulmont.ext.web.ui.TreeCompany.CompanyExtEditor"
+        messagesPack="com.haulmont.ext.web.ui.TreeCompany"
+        caption="msg://TreeCompanyEditor.caption"
+        datasource="extCompanyDs"
+        focusComponent="name"
+        >
+
+    <dsContext>
+        <datasource id="extCompanyDs" class="com.haulmont.ext.core.entity.CompanyExt" view="edit"/>
+        <datasource id="extCompanyDsH" class="com.haulmont.ext.core.entity.CompanyExt" view="edit"/>
+        <collectionDatasource id="parentExtCompanysDs" class="com.haulmont.ext.core.entity.CompanyExt" view="browse">
+            <query>
+                <![CDATA[select e from ext$CompanyExt e where (not e.id = :param$item) and e.republic.id = :param$republic]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+
+    <#assign width=300>
+    <layout expand="windowActions" width="900" height="900">
+        <vbox margin="true" spacing="true" stylename="edit-area">
+            <grid id="grid" spacing="true" expandable="false">
+                <columns>
+                    <column flex="1"/>
+                    <column flex="1"/>
+                </columns>
+                <rows>
+                    <row>
+                        <label value="msg://name"/>
+                        <textField id="name" datasource="extCompanyDs" property="fullName" width="${width}" required="true"
+                                   requiredMessage="msg://nameMsg"/>
+                    </row>
+                    <!--<row>
+                        <label value="msg://addressS"/>
+                        <textField id="addressS" datasource="subdivisionDs" property="addressS" width="${width}" required="false"
+                                   requiredMessage="msg://addressSMsg"/>
+                    </row> -->
+                    <row>
+                        <label value="msg://parentCompanyExt"/>
+                        <pickerField id="parentCompanyExt" datasource="extCompanyDs" property="parentCompanyExt"
+                                     optionsDatasource="parentExtCompanysDs" width="${width}"/>
+                    </row>
+                </rows>
+            </grid>
+        </vbox>
+        <iframe id="windowActions" src="/com/haulmont/cuba/gui/edit-window.actions.xml"/>
+    </layout>
+</window>

@@ -1,0 +1,32 @@
+<window
+        xmlns="http://schemas.haulmont.com/cuba/3.1/window.xsd"
+        extends="/com/haulmont/docflow/web/ui/company/company-browse.xml"
+        >
+    <dsContext>
+        <groupDatasource
+                id="companiesDs"
+                class="com.haulmont.ext.core.entity.CompanyExt"
+                view="browse"
+                >
+            <query>
+                select distinct c from ext$CompanyExt c order by c.name
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <layout expandLayout="true">
+        <vbox id="table-panel" expand="companiesTable" spacing="true">
+
+            <hbox id="verificationactsPanel" align="MIDDLE_LEFT" spacing="true" margin="true">
+            </hbox>
+            <groupTable id="companiesTable">
+
+                <columns>
+                    <column id="republic"/>
+                    <column id="aread"/>
+                    <column id="villa"/>
+                    <column id="parentCompanyExt"/>
+                </columns>
+            </groupTable>
+        </vbox>
+    </layout>
+</window>

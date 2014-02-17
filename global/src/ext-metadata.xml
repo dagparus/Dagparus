@@ -1,0 +1,8 @@
+<metadata>
+    <entityFactory>
+
+         <replace class="com.haulmont.docflow.core.entity.Company"
+                  with="com.haulmont.ext.core.entity.CompanyExt"/>
+
+    </entityFactory>
+</metadata>

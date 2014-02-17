@@ -1,0 +1,280 @@
+<window
+        xmlns="http://schemas.haulmont.com/cuba/3.3/window.xsd"
+        class = "com.haulmont.ext.web.ui.Client.ClientEditor"
+        caption = "msg://editorCaption"
+        datasource = "ClientDs"
+        messagesPack = "com.haulmont.ext.web.ui.Client">
+
+    <dsContext>
+        <datasource id = "ClientDs"
+                    class = "com.haulmont.ext.core.entity.ExtClient"
+                    view = "edit"/>
+        <collectionDatasource id="companyDs"
+                    class="com.haulmont.ext.core.entity.CompanyExt"
+                    view="edit"/>
+
+    </dsContext>
+
+
+    <layout expand = "windowActions">
+        <tabsheet id="tabsheet">
+            <tab id="main" caption="Главное" margin="true">
+                <vbox>
+                    <grid id="grid" margin="true" spacing="true" expandable="false" stylename="edit-area">
+                    <columns>
+                        <column flex="1"/>
+                        <column flex="1"/>
+                    </columns>
+                    <rows>
+                    <row>
+                    <label value="msg://surnameC"/>
+                    <textField id="surnameC"
+                               datasource="ClientDs"
+                               property="surnameC"
+                               required="false"
+                               width="300"/>
+                    </row>
+                    <row>
+                    <label value="msg://nameC"/>
+                    <textField id="nameC"
+                               datasource="ClientDs"
+                               property="nameC"
+                               required="false"
+                               width="300"/>
+                    </row>
+                    <row>
+                    <label value="msg://patronymicC"/>
+                    <textField id = "patronymicC"
+                               datasource="ClientDs"
+                               property="patronymicC"
+                               required = "false"
+                               width="300"/>
+
+                     </row>
+                     <row>
+                     <label id="nameLabel" value="msg://name"/>
+                     <textField id="name"
+                                datasource="ClientDs"
+                                property="name"
+                                width="300"
+                                required="true" />
+
+                      </row>
+                      <row>
+                      <label value="msg://post"/>
+                      <textField id = "post"
+                               datasource="ClientDs"
+                               property="post"
+                               required="false"
+                               width="300"/>
+                       </row>
+                        <row>
+                              <label value="msg://extCompany"/>
+                              <actionsField id = "extCompany"
+                                       datasource="ClientDs"
+                                       property="extCompany"
+                                       required = "false"
+                                       optionsDatasource="companyDs"
+                                       lookupScreen="df$Company.browse"
+                                       width="300"
+                                       dropdown="true"
+                                       lookup="true"
+                                       open="true"/>
+                        </row>
+                        <row>
+                            <label value="msg://nameCw"/>
+                            <textField id="nameCw"
+                                       datasource="ClientDs"
+                                       property="nameCw"
+                                       required="false"
+                                       width="300"/>
+                        </row>
+                       <row>
+                       <label value="msg://numberTel"/>
+                       <textField id = "numberTel"
+                               datasource="ClientDs"
+                               property="numberTel"
+                               required = "false"
+                               width="100"/>
+                         </row>
+                        <row>
+                        <label value="msg://numberTw"/>
+                        <textField id = "numberTw"
+                               datasource="ClientDs"
+                               property="numberTw"
+                               required = "false"
+                               width="100"/>
+                         </row>
+
+                        <row>
+                            <label value="msg://placeBirth"/>
+                            <textField id = "placeBirth"
+                                       datasource="ClientDs"
+                                       property="placeBirth"
+                                       required="false"
+                                       width="300"/>
+                        </row>
+                        <row>
+                        <label value="msg://address"/>
+                        <textField id = "address"
+                               datasource="ClientDs"
+                               property="address"
+                               required="false"
+                               width="300"
+                               rows = "3"/>
+                         </row>
+                        <row>
+                            <label value="msg://legalAddress"/>
+                            <textField id = "legalAddress"
+                                       datasource="ClientDs"
+                                       property="legalAddress"
+                                       required="false"
+                                       width="300"
+                                       rows = "3"/>
+                        </row>
+                        <row>
+                            <label value="msg://countChs"/>
+                            <textField id="countChs"
+                                       datasource="ClientDs"
+                                       property="countChs"
+                                       width="100"
+                                       required="false"/>
+                        </row>
+                        <row>
+                        <label value="Пол"/>
+                        <optionsGroup id="sex"
+                               datasource="ClientDs"
+                               property="sex"/>
+
+                         </row>
+                    </rows>
+                    </grid>
+                </vbox>
+                <iframe id = "windowActions"
+                        src = "/com/haulmont/cuba/gui/edit-window.actions.xml"/>
+
+            </tab>
+
+            <tab id="declension" caption="Склонение Ф И О" margin="true" index="1">
+                <vbox expand="x">
+                    <grid id="grid" margin="true" spacing="true" expandable="false" stylename="edit-area">
+                        <columns>
+                            <column flex="1"/>
+                            <column flex="1"/>
+                        </columns>
+                        <rows>
+                            <row>
+                                <label value="msg://surnameR"/>
+                                <textField id="surnameR"
+                                           datasource="ClientDs"
+                                           property="surnameR"
+                                           required="false"
+                                           width="300"/>
+                            </row>
+                            <row>
+                                <label value="msg://nameR"/>
+                                <textField id="nameR"
+                                           datasource="ClientDs"
+                                           property="nameR"
+                                           width="300"
+                                           required="false"/>
+                            </row>
+                            <row>
+                                <label value="msg://patronymicR"/>
+                                <textField id = "patronymicR"
+                                           datasource="ClientDs"
+                                           property="patronymicR"
+                                           required = "false"
+                                           width="300"/>
+                            </row>
+                        </rows>
+                    </grid>
+                </vbox>
+                <iframe id = "windowActions"
+                        src = "/com/haulmont/cuba/gui/edit-window.actions.xml"/>
+                <vbox id="x"/>
+            </tab>
+
+            <tab id="declension" caption="Дополнительная информация" margin="true" index="2">
+                <vbox expand="y">
+                    <grid id="grid" margin="true" spacing="true" expandable="false" stylename="edit-area">
+                    <columns>
+                        <column flex="1"/>
+                        <column flex="1"/>
+                    </columns>
+                  <rows>
+                       <row>
+                          <label value="msg://inn"/>
+                          <textField id = "inn"
+                                     property="inn"
+                                     datasource="ClientDs"
+                                     required = "false"
+                                     width="300"/>
+                      </row>
+
+                    <row>
+                    <label value="msg://kpp"/>
+                    <textField id = "kpp"
+                               property="kpp"
+                               datasource="ClientDs"
+                               required = "false"
+                               width="300"/>
+                    </row>
+
+                    <row>
+                    <label value="msg://bank"/>
+                    <textField id = "bank"
+                               datasource="ClientDs"
+                               property="bank"
+                               required = "false"
+                               width="300"/>
+                    </row>
+                    <row>
+                    <label value="msg://rs"/>
+                    <textField id = "rs"
+                               property="rs"
+                               datasource="ClientDs"
+                               width="300"
+                               required = "false"/>
+                    </row>
+
+                    <row>
+                    <label value="msg://ks"/>
+                    <textField id="ks"
+                               datasource="ClientDs"
+                               property="ks"
+                               width="300"
+                               required="false"/>
+                    </row>
+                    <row>
+                    <label value="msg://bik"/>
+                    <textField id="bik"
+                               datasource="ClientDs"
+                               property="bik"
+                               width="300"
+                               required="false"/>
+                    </row>
+                    <row>
+                    <label value="msg://ls"/>
+                    <textField id="ls"
+                               datasource="ClientDs"
+                               property="ls"
+                               width="300"
+                               required="false"/>
+                    </row>
+
+                  </rows>
+                    </grid>
+                </vbox>
+                <iframe id = "windowActions"
+                        src = "/com/haulmont/cuba/gui/edit-window.actions.xml"/>
+                <vbox id="y"/>
+            </tab>
+
+
+
+
+
+        </tabsheet>
+    </layout>
+</window>

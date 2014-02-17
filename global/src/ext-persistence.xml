@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+    <persistence-unit name="cuba" transaction-type="RESOURCE_LOCAL">
+        <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+
+        <mapping-file>ext-mapping.xml</mapping-file>
+
+        <class>com.haulmont.ext.core.entity.ExtHead</class>
+        <class>com.haulmont.ext.core.entity.Responsible</class>
+        <class>com.haulmont.ext.core.entity.ExtClient</class>
+        <class>com.haulmont.ext.core.entity.Aread</class>
+        <class>com.haulmont.ext.core.entity.Republic</class>
+        <class>com.haulmont.ext.core.entity.Villa</class>
+        <class>com.haulmont.ext.core.entity.CompanyExt</class>
+        <class>com.haulmont.ext.core.entity.ContractPP</class>
+        <class>com.haulmont.ext.core.entity.JournalV</class>
+        <class>com.haulmont.ext.core.entity.JournalI</class>
+        <class>com.haulmont.ext.core.entity.TaskRequest</class>
+        <class>com.haulmont.ext.core.entity.Call</class>
+        <class>com.haulmont.ext.core.entity.ExtModull</class>
+        <class>com.haulmont.ext.core.entity.ContractppModull</class>
+        <properties/>
+
+    </persistence-unit>
+</persistence>

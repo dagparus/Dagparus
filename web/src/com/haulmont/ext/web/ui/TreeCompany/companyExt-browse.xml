@@ -1,0 +1,135 @@
+<!--
+  ~ Copyright (c) 2014 Haulmont Technology Ltd. All Rights Reserved.
+  ~ Haulmont Technology proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<window
+        xmlns="http://www.haulmont.com/schema/cuba/gui/window.xsd"
+        class="com.haulmont.ext.web.ui.TreeCompany.CompanyExtBrowser"
+        messagesPack="com.haulmont.ext.web.ui.TreeCompany"
+        caption="msg://TreeCompanyBrowser.caption"
+        lookupComponent="extcompanysTable"
+        >
+
+    <dsContext>
+        <collectionDatasource id="republicDs"
+                              class="com.haulmont.ext.core.entity.Republic"
+                              view="browse">
+        <query>
+            select r from ext$Republic r order by r.regionname
+        </query>
+
+        </collectionDatasource>
+
+        <collectionDatasource id="areadDs"
+                              class="com.haulmont.ext.core.entity.Aread"
+                              view="browse">
+            <query>
+                select a from ext$Aread a where a.republic.id = :ds$republicDs order by a.areadname
+            </query>
+
+        </collectionDatasource>
+
+        <collectionDatasource id="villaDs"
+                              class="com.haulmont.ext.core.entity.Villa"
+                              view="browse">
+            <query>
+                select v from ext$Villa v order by v.villaname
+            </query>
+
+        </collectionDatasource>
+
+        <collectionDatasource id="extCompanyDs" class="com.haulmont.ext.core.entity.CompanyExt"
+                              view="browse">
+            <datasourceClass>com.haulmont.ext.web.ui.TreeCompany.CompanyExtDatasource</datasourceClass>
+        </collectionDatasource>
+
+        <collectionDatasource id = "extClientDs"
+                              class = "com.haulmont.ext.core.entity.ExtClient"
+                              view = "browse">
+            <query>
+                <![CDATA[select distinct e from ext$Client e where e.extCompany.id = :ds$extCompanyDs]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+
+    <#assign width = 200>
+    <#assign hBoxWidth = 750>
+    <layout>
+        <vbox>
+            <split id="split" orientation="horizontal" pos="30">
+                <vbox id="extCompanysPanel" expand="extCompanysTable" spacing="true" margin="false;true;false;false;">
+                    <grid id="grid" margin="true" spacing="true" expandable="false" stylename="edit-area">
+                    <columns>
+                        <column flex="1"/>
+                        <column flex="1"/>
+                    </columns>
+                    <rows>
+                       <row>
+                             <label value="msg://republic"/>
+                             <lookupField id = "republic"
+                                     optionsDatasource = "republicDs"
+                                     property="republic"
+                                     width="${200}"/>
+                       </row>
+                       <row>
+                        <label value="msg://aread"/>
+                        <lookupField id = "aread"
+                                     optionsDatasource = "areadDs"
+                                     property="aread"
+                                     width="${200}"/>
+                       </row>
+                        <row>
+                        <label value="msg://villa"/>
+                        <lookupField id = "villa"
+                                     optionsDatasource = "villaDs"
+                                     property="villa"
+                                     width="${200}"/>
+                        </row>
+                    </rows>
+                    </grid>
+                    <treeTable id="extCompanysTable">
+                        <buttonsPanel>
+                            <button action="extCompanysTable.create" icon="icons/create.png"/>
+                            <button action="extCompanysTable.edit" icon="icons/edit.png"/>
+                            <button action="extCompanysTable.remove" icon="icons/remove.png"/>
+                            <button action="extCompanysTable.refresh" icon="icons/refresh.png"/>
+                        </buttonsPanel>
+                        <columns>
+                            <column id="name" caption="msg://name"/>
+                        </columns>
+                        <rows datasource="extCompanyDs"/>
+                    </treeTable>
+                </vbox>
+                <vbox margin="false;false;false;true">
+                    <tabsheet id="tabsheet">
+                        <tab id="mainTab" caption="msg://client.caption" margin="true">
+                            <groupTable id="extClientTable" editable="false" presentations="true" expand="true">
+                                <buttonsPanel>
+                                    <button action="extClientTable.create" icon="icons/create.png"/>
+                                    <button action="extClientTable.edit" icon="icons/edit.png"/>
+                                    <button action="extClientTable.remove" icon="icons/remove.png"/>
+                                    <button action="extClientTable.add" icon="icons/add.png"/>
+                                </buttonsPanel>
+                                <columns>
+                                    <column id = "name"/>
+                                    <column id = "post"/>
+                                    <column id = "numberTel"/>
+                                    <column id = "numberTw"/>
+                                    <column id = "nameCw"/>
+                                    <column id = "address"/>
+                                </columns>
+                                <rows datasource="extClientDs"/>
+                            </groupTable>
+                        </tab>
+                        <!-- <tab id="correspondenceHistoryTab" caption="msg://correspondenceHistoryTab" lazy="true">
+                             <iframe id="correspondenceHistoryFrame"
+                                     src="/com/haulmont/docflow/web/ui/correspondencehistory/correspondent-correspondence-history-frame.xml"/>
+                         </tab> -->
+                    </tabsheet>
+                </vbox>
+            </split>
+        </vbox>
+    </layout>
+</window>

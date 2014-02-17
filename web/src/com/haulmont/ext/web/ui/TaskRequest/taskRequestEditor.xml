@@ -1,0 +1,54 @@
+<window xmlns:ext="http://www.haulmont.com/schema/cuba/gui/window-ext.xsd"
+        class="com.haulmont.ext.web.ui.TaskRequest.TaskRequestEditor"
+        messagesPack="com.haulmont.ext.web.ui.TaskRequest"
+        extends = "/com/haulmont/taskman/web/ui/task/task-edit.xml">
+    <dsContext>
+        <datasource id="cardDs" class="com.haulmont.ext.core.entity.TaskRequest" view="edit"/>
+        <collectionDatasource id="extClientDs" class="com.haulmont.ext.core.entity.ExtClient" view="_local">
+            <query>
+                select c from ext$Client c order by c.name
+            </query>
+        </collectionDatasource>
+    </dsContext>
+
+    <layout>
+        <split>
+            <hbox>
+                <tabsheet>
+                     <tab id="mainTab">
+                          <accessControl>
+                               <groupBox>
+                                    <scrollbox>
+                                        <vbox>
+                                           <grid id="taskInfo">
+                                               <rows>
+                                                   <row ext:index="3">
+                                                       <label  id="extClientLabel" value="msg://extClient"/>
+                                                       <actionsField id = "extClient"
+                                                                     property="extClient"
+                                                                     datasource="cardDs"
+                                                                     optionsDatasource="extClientDs"
+                                                                     lookupScreen="ext$Client.browse"
+                                                                     width="240"
+                                                                     required = "true"
+                                                                     dropdown="true"
+                                                                     lookup="true"
+                                                                     open="true"/>
+                                                   </row>
+                                                   <row ext:index="4">
+                                                       <label  id="numberLabel" value="msg://number"/>
+                                                       <textField id="number" datasource="cardDs" property="number"
+                                                                  width="240"/>
+                                                   </row>
+                                               </rows>
+                                           </grid>
+                                        </vbox>
+                                    </scrollbox>
+                               </groupBox>
+                          </accessControl>
+                     </tab>
+                </tabsheet>
+            </hbox>
+        </split>
+    </layout>
+</window>

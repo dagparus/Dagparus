@@ -1,0 +1,60 @@
+<window
+        xmlns = "http://www.haulmont.com/schema/cuba/gui/window.xsd"
+        class = "com.haulmont.ext.web.ui.Aread.AreadEditor"
+        caption = "msg://editorCaption"
+        datasource = "areadDs"
+        messagesPack = "com.haulmont.ext.web.ui.Aread">
+
+    <dsContext>
+        <datasource id = "areadDs"
+                    class = "com.haulmont.ext.core.entity.Aread"
+                    view = "edit"/>
+
+        <collectionDatasource id="republicDs"
+                              class="com.haulmont.ext.core.entity.Republic"
+                              view="_local"/>
+        <query>
+            select s from ext$Republic s order by s.regionname
+        </query>
+
+    </dsContext>
+
+    <layout expand = "windowActions">
+        <vbox spacing = "true">
+
+            <grid id="grid" margin="true" spacing="true" expandable="false" stylename="edit-area">
+                <columns>
+                    <column flex="1"/>
+                    <column flex="1"/>
+                </columns>
+                <rows>
+                    <row>
+                        <label value="msg://republic"/>
+                        <actionsField id = "republic"
+                                      property="republic"
+                                      datasource="areadDs"
+                                      optionsDatasource="republicDs"
+                                      lookupScreen="ext$Republic.browse"
+                                      width="${300}"
+                                      required = "true"
+                                      dropdown="true"
+                                      lookup="true"
+                                      open="true"/>
+                    </row>
+                    <row>
+                        <label value="msg://areadname"/>
+                        <textField id = "areadname"
+                                   datasource = "areadDs"
+                                   property="areadname"
+                                   width="${300}"
+                                   required = "true"/>
+                    </row>
+
+                </rows>
+            </grid>
+
+        </vbox>
+        <iframe id = "windowActions"
+                src = "/com/haulmont/cuba/gui/edit-window.actions.xml"/>
+    </layout>
+</window>

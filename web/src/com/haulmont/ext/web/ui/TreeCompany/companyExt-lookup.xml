@@ -1,0 +1,80 @@
+<!--
+  ~ Copyright (c) 2014 Haulmont Technology Ltd. All Rights Reserved.
+  ~ Haulmont Technology proprietary and confidential.
+  ~ Use is subject to license terms.
+  -->
+
+<window
+        xmlns="http://www.haulmont.com/schema/cuba/gui/window.xsd"
+        class="com.haulmont.ext.web.ui.TreeCompany.CompanyExtLookup"
+        messagesPack="com.haulmont.ext.web.ui.TreeCompany"
+        caption="msg://SubdivisionBrowser.caption"
+        lookupComponent="extCompanysTable"
+        >
+
+    <dsContext>
+
+        <collectionDatasource  id="republicDs" class="com.haulmont.ext.core.entity.Republic" view="_local">
+            <query>
+                select o from ext$Republic o order by o.regionname
+            </query>
+        </collectionDatasource>
+
+        <collectionDatasource  id="areadDs" class="com.haulmont.ext.core.entity.Aread" view="_local">
+            <query>
+                select o from ext$Aread o order by o.areadname
+            </query>
+        </collectionDatasource>
+
+        <collectionDatasource  id="villaDs" class="com.haulmont.ext.core.entity.Villa" view="_local">
+            <query>
+                select o from ext$Villa o order by o.villaname
+            </query>
+        </collectionDatasource>
+
+        <hierarchicalDatasource
+                id="extCompanysDsH"
+                class="com.haulmont.ext.core.entity.CompanyExt"
+                view="browse"
+                hierarchyProperty="parentCompanyExt"
+                >
+            <query>
+                <![CDATA[select d from ext$CompanyExt d where not d.id in (:custom$extCompanys) and
+                         d.republic.id = :ds$republicDs order by d.republic]]>
+                <filter>
+                    <and>
+                        <c>d.name like :(?i)component$searchSimpleText</c>
+                    </and>
+                </filter>
+            </query>
+        </hierarchicalDatasource>
+    </dsContext>
+
+    <layout expandLayout="true">
+        <vbox id="extCompanysPanel" expand="extCompanysTable" spacing="true">
+            <vbox id="simpleFilter" spacing="true" stylename="edit-area" margin="true" visible="false">
+                <label value="msg://searchSimple"/>
+                <hbox spacing="true">
+                    <textField id="searchSimpleText" width="150px"/>
+                    <button id="searchSimple"/>
+                </hbox>
+            </vbox>
+            <hbox spacing="true" margin="true">
+                <label id="republicLabel" value="msg://republic"/>
+                <lookupField id="republic" optionsDatasource="republicDs" width="200px"/>
+
+             <!--   <label id="areadLabel" value="msg://aread"/>
+                <lookupField id="aread" optionsDatasource="areadDs" width="200px"/>
+
+                <label id="villaLabel" value="msg://villa"/>
+                <lookupField id="villa" optionsDatasource="villaDs" width="200px"/> -->
+            </hbox>
+            <treeTable id="extCompanysTable">
+                <columns>
+                    <column id="name" caption="msg://name"/>
+                </columns>
+                <rows datasource="extCompanysDsH"/>
+            </treeTable>
+        </vbox>
+    </layout>
+</window>

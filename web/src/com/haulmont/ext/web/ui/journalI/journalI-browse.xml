@@ -1,0 +1,50 @@
+<window xmlns="http://schemas.haulmont.com/cuba/3.3/window.xsd"
+        class = "com.haulmont.ext.web.ui.journalI.JournalIBrowser"
+        messagesPack = "com.haulmont.ext.web.ui.journalI"
+        caption = "msg://browserCaption"
+        lookupComponent = "journalITable"
+        >
+    <dsContext>
+        <collectionDatasource id = "journalIDs"
+                              class = "com.haulmont.ext.core.entity.JournalI"
+                              view = "browse">
+            <query>
+                select o from ext$JournalI o
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <layout expandLayout = "true">
+        <vbox id = "table-panel"
+              expand = "journalITable"
+              spacing = "true"
+              height = "100%">
+            <filter id = "genericFilter"
+                    datasource = "journalIDs"
+                    stylename = "edit-area">
+                <properties include = ".*"
+                            exclude = ""/>
+            </filter>
+            <hbox id="verificationactsPanel" align="MIDDLE_LEFT" spacing="true" margin="true">
+                <button action="journalITable.create" icon="icons/create.png"/>
+                <button action="journalITable.edit" icon="icons/edit.png"/>
+                <button action="journalITable.remove" icon="icons/remove.png"/>
+                <button action="journalITable.excel" icon="icons/excel.png"/>
+                <button action="journalITable.refresh" icon="icons/refresh.png"/>
+            </hbox>
+
+            <table id = "journalITable"
+                   editable = "false">
+                <rowsCount/>
+                <columns>
+                    <column id="numberJI"/>
+                    <column id = "dateJI"/>
+                    <column id = "whom"/>
+                    <column id = "contentI"/>
+                    <column id = "contactJI"/>
+                    <column id = "statusI"/>
+                </columns>
+                <rows datasource = "journalIDs"/>
+            </table>
+        </vbox>
+    </layout>
+</window>

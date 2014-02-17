@@ -1,0 +1,201 @@
+<menu-config xmlns="http://www.haulmont.com/schema/cuba/gui/menu-config.xsd">
+
+<menu id="taskman">
+    <item id="tm$Task.edit" shortcut="${thesis.shortcut.taskEdit}">
+        <permissions>
+            <permission type="ENTITY_OP" target="tm$Task:create"/>
+        </permissions>
+    </item>
+    <item id="tm$Task.browse" shortcut="${thesis.shortcut.taskBrowse}"/>
+
+    <item id="-"/>
+    <item id="taskGroupCreator" openType="DIALOG">
+        <param name="openTask" value="true"/>
+        <permissions>
+            <permission type="ENTITY_OP" target="tm$TaskGroup:create"/>
+        </permissions>
+    </item>
+    <item id="tm$TaskGroup.browse"/>
+
+    <item id="-"/>
+
+    <item id="tm$TaskPattern.browse"/>
+    <item id="tm$TaskGroupPattern.browse"/>
+
+    <item id="-"/>
+
+    <item id="tm$TaskType.browse"/>
+    <item id="tm$ScheduleTask.browse"/>
+</menu>
+
+<menu id="docflow">
+
+    <item id="docCreatorItem" shortcut="${thesis.shortcut.docEdit}">
+        <param name="docType" value="df$SimpleDoc"/>
+        <permissions>
+            <permission type="ENTITY_OP" target="df$SimpleDoc:create"/>
+        </permissions>
+    </item>
+
+    <item id="df$SimpleDoc.browse" shortcut="${thesis.shortcut.docBrowse}"/>
+
+    <item id="-"/>
+
+    <item id="contractCreatorItem" shortcut="${thesis.shortcut.contractEdit}">
+        <param name="docType" value="df$Contract"/>
+        <permissions>
+            <permission type="ENTITY_OP" target="df$Contract:create"/>
+        </permissions>
+    </item>
+
+    <item id="df$Contract.browse" shortcut="${thesis.shortcut.contractBrowse}"/>
+
+    <item id="-"/>
+
+    <menu id="templates">
+        <item id="df$SimpleDoc.templateBrowse">
+            <param name="inTemplates" value="true"/>
+            <permissions>
+                <permission type="ENTITY_OP" target="df$SimpleDoc:create"/>
+            </permissions>
+        </item>
+        <item id="df$Contract.templateBrowse">
+            <param name="inTemplates" value="true"/>
+            <permissions>
+                <permission type="ENTITY_OP" target="df$Contract:create"/>
+            </permissions>
+        </item>
+    </menu>
+
+    <item id="-"/>
+    <item id="ext$ContractPP.browse"/>
+
+    <item id="-"/>
+
+    <item id="df$DocType.browse"/>
+    <item id="df$DocKind.browse"/>
+</menu>
+
+<menu id="exsis">
+    <item id="ext$JournalV.browse"/>
+        <!--<item id="ext$JournalV.edit"/>-->
+    <item id="ext$JournalI.browse"/>
+    <item id="-"/>
+    <item id="ext$Call.edit"/>
+    <item id="ext$Call.browse"/>
+     <!-- <item id="ext$JournalI.edit"/>-->
+</menu>
+
+<!-- <menu id="office">
+    <item id="df$DocIncome.browse" shortcut="${thesis.shortcut.docIncome}"/>
+    <item id="df$DocOutcome.browse" shortcut="${thesis.shortcut.docOutcome}"/>
+    <item id="df$DocInternal.browse" shortcut="${thesis.shortcut.docInternal}"/>
+    <item id="-"/>
+    <item id="df$OfficeFileNomenclature.browse"/>
+    <item id="df$OfficeFile.browse"/>
+    <item id="-"/>
+    <item id="df$DocReceivingMethod.browse"/>
+</menu>       -->
+
+    <menu id="ext">
+        <!--<item id="ext$Head.browse"/>
+        <item id="ext$Head.edit"/>-->
+        <!--<item id="-"/>
+        <item id="ext$Responsible.browse"/>
+        <item id="ext$Responsible.edit"/>-->
+        <item id="ext$Modull.browse"/>
+        <item id="ext$Modull.edit"/>
+        <item id="-"/>
+        <item id="ext$Client.browse"/>
+        <item id="ext$Client.edit"/>
+        <item id="-"/>
+        <item id="ext$CompanyExt.browse"/>
+        <item id="-"/>
+        <menu id="munic">
+            <item id="ext$Republic.browse"/>
+            <!--<item id="ext$Republic.edit"/>-->
+            <item id="-"/>
+
+            <item id="ext$Aread.browse"/>
+            <!--<item id="ext$Aread.edit"/>-->
+            <item id="-"/>
+
+            <item id="ext$Villa.browse"/>
+            <!--<item id="ext$Villa.edit"/>-->
+        </menu>
+    </menu>
+
+<menu id="reference">
+    <!-- Taskman -->
+    <item id="tm$Priority.browse"/>
+    <item id="tm$ProjectGroup.browse"/>
+    <item id="df$Category.browse"/>
+    <item id="wf$UserGroup.browse"/>
+    <item id="wf$AttachTypes.browse"/>
+
+    <!-- Docflow -->
+    <item id="-"/>
+
+    <item id="-"/>
+    <item id="df$Organization.browse"/>
+    <item id="df$Department.browse"/>
+    <item id="df$Employee.browse" shortcut="${thesis.shortcut.employeeBrowse}"/>
+    <item id="df$UserSubstitution.browse"/>
+    <item id="df$TypicalResolution.browse"/>
+
+    <item id="-"/>
+
+    <menu id="kontragent">
+        <item id="df$Company.browse" shortcut="${thesis.shortcut.companyBrowse}"/>
+        <item id="df$Individual.browse"/>
+    </menu>
+
+    <menu id="bank_and_cur">
+        <item id="df$Currency.browse"/>
+        <item id="df$Bank.browse"/>
+        <item id="df$BankRegion.browse"/>
+    </menu>
+
+</menu>
+
+<menu id="administration">
+    <item id="sec$User.browse" shortcut="${thesis.shortcut.userBrowse}"/>
+    <item id="sec$Group.browse"/>
+    <item id="sec$Role.browse"/>
+    <item id="-"/>
+    <item id="sec$UserSessionEntity.browse"/>
+    <item id="core$Entity.restore"/>
+    <item id="jmxcontrol$DisplayMbeans"/>
+    <item id="core$ScheduledTask.browse"/>
+    <item id="report$Report.browse"/>
+    <item id="report$ReportGroup.browse"/>
+    <!--<item id="sys$Categories.browse"/>-->
+    <item id="serverLog"/>
+    <item id="printDomain"/>
+    <item id="-"/>
+    <!--<item id="wf$SendingSms.browse"/>-->
+    <!--<item id="-"/>-->
+    <item id="df$Numerator.browse"/>
+    <item id="wf$Design.browse"/>
+    <item id="wf$Proc.browse"/>
+    <item id="wf$ProcStageType.browse"/>
+    <item id="tm$ScheduleActionType.browse"/>
+    <item id="-"/>
+    <item id="wf$WorkCalendar.browse"/>
+    <item id="systemSettings"/>
+    <item id="-"/>
+    <item id="feedback"/>
+    <item id="-"/>
+    <item id="loadClients"/>
+</menu>
+
+<menu id="help">
+    <item id="tm$Settings" shortcut="${thesis.shortcut.settings}"/>
+    <item id="logWindow"/>
+    <item id="wf$AttachClipboard" openType="DIALOG" resizable="false"/>
+    <item id="sec$ScreenHistory.browse" openType="DIALOG"/>
+    <item id="-"/>
+    <item id="df$About" openType="DIALOG"/>
+</menu>
+
+</menu-config>

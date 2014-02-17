@@ -1,0 +1,52 @@
+<dagParus:window
+        xmlns:dagParus= "http://www.haulmont.com/schema/cuba/gui/window.xsd"
+        class = "com.haulmont.ext.web.ui.Aread.AreadBrowser"
+        messagesPack = "com.haulmont.ext.web.ui.Aread"
+        caption = "msg://browserCaption"
+        lookupComponent = "areadTable"
+        >
+
+    <dagParus:dsContext>
+        <dagParus:collectionDatasource id = "areadDs"
+                                       class = "com.haulmont.ext.core.entity.Aread"
+                                       view = "browse">
+            <dagParus:query>
+                <![CDATA[
+                select a from ext$Aread a order by a.areadname
+            ]]>
+            </dagParus:query>
+        </dagParus:collectionDatasource>
+    </dagParus:dsContext>
+
+    <dagParus:layout expandLayout = "true">
+        <dagParus:vbox id = "table-panel"
+                       expand = "areadTable"
+                       spacing = "true"
+                       height = "100%">
+            <dagParus:filter id = "genericFilter"
+                             datasource = "areadDs"
+                             stylename = "edit-area">
+                <dagParus:properties include = ".*"
+                                     exclude = ""/>
+            </dagParus:filter>
+
+            <dagParus:hbox id="verificationactsPanel" align="MIDDLE_LEFT" spacing="true" margin="true">
+                <dagParus:button action="areadTable.create" icon="icons/create.png"/>
+                <dagParus:button action="areadTable.edit" icon="icons/edit.png"/>
+                <dagParus:button action="areadTable.remove" icon="icons/remove.png"/>
+                <dagParus:button action="areadTable.excel" icon="icons/excel.png"/>
+                <dagParus:button action="areadTable.refresh" icon="icons/refresh.png"/>
+            </dagParus:hbox>
+
+            <dagParus:table id = "areadTable"
+                            editable = "false">
+                <dagParus:rowsCount/>
+                <dagParus:columns>
+                    <dagParus:column id = "areadname"/>
+                    <dagParus:column id = "republic"/>
+                </dagParus:columns>
+                <dagParus:rows datasource = "areadDs"/>
+            </dagParus:table>
+        </dagParus:vbox>
+    </dagParus:layout>
+</dagParus:window>

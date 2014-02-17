@@ -1,0 +1,53 @@
+
+<dagParus:window
+        xmlns:dagParus= "http://www.haulmont.com/schema/cuba/gui/window.xsd"
+        class = "com.haulmont.ext.web.ui.Republic.RepublicBrowser"
+        messagesPack = "com.haulmont.ext.web.ui.Republic"
+        caption = "msg://browserCaption"
+        lookupComponent = "republicTable"
+        >
+
+    <dagParus:dsContext>
+        <dagParus:collectionDatasource id = "republicDs"
+                                       class = "com.haulmont.ext.core.entity.Republic"
+                                       view = "_local">
+            <dagParus:query>
+                <![CDATA[
+                select p from ext$Republic p order by p.regionname
+            ]]>
+            </dagParus:query>
+        </dagParus:collectionDatasource>
+    </dagParus:dsContext>
+
+    <dagParus:layout expandLayout = "true">
+        <dagParus:vbox id = "table-panel"
+                       expand = "republicTable"
+                       spacing = "true"
+                       height = "100%">
+            <dagParus:filter id = "genericFilter"
+                             datasource = "republicDs"
+                             stylename = "edit-area">
+                <dagParus:properties include = ".*"
+                                     exclude = ""/>
+            </dagParus:filter>
+
+            <dagParus:hbox id="verificationactsPanel" align="MIDDLE_LEFT" spacing="true" margin="true">
+                <dagParus:button action="republicTable.create" icon="icons/create.png"/>
+                <dagParus:button action="republicTable.edit" icon="icons/edit.png"/>
+                <dagParus:button action="republicTable.remove" icon="icons/remove.png"/>
+                <dagParus:button action="republicTable.excel" icon="icons/excel.png"/>
+                <dagParus:button action="republicTable.refresh" icon="icons/refresh.png"/>
+            </dagParus:hbox>
+
+            <dagParus:table id = "republicTable"
+                            editable = "false">
+                <dagParus:rowsCount/>
+                <dagParus:columns>
+                    <dagParus:column id = "regioncode"/>
+                    <dagParus:column id = "regionname"/>
+                </dagParus:columns>
+                <dagParus:rows datasource = "republicDs"/>
+            </dagParus:table>
+        </dagParus:vbox>
+    </dagParus:layout>
+</dagParus:window>

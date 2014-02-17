@@ -1,0 +1,119 @@
+<window
+        xmlns = "http://www.haulmont.com/schema/cuba/gui/window.xsd"
+        class = "com.haulmont.ext.web.ui.Villa.VillaEditor"
+        caption = "msg://editorCaption"
+        datasource = "villaDs"
+        messagesPack = "com.haulmont.ext.web.ui.Villa">
+
+    <dsContext>
+        <datasource id = "villaDs"
+                    class = "com.haulmont.ext.core.entity.Villa"
+                    view = "edit"/>
+
+
+        <collectionDatasource id="republicDs"
+                              class="com.haulmont.ext.core.entity.Republic"
+                              view="edit">
+
+            <query>
+                select s from ext$Republic s order by s.regionname
+            </query>
+        </collectionDatasource>
+
+        <collectionDatasource id="areadDs"
+                              class="com.haulmont.ext.core.entity.Aread"
+                              view="edit">
+
+            <query>
+                select p from ext$Aread p where p.republic.id = :ds$villaDs.republic
+            </query>
+        </collectionDatasource>
+
+        <collectionDatasource id="individualDs"
+                              class="com.haulmont.docflow.core.entity.Individual"
+                              view="_local">
+
+        </collectionDatasource>
+
+    </dsContext>
+
+    <layout expand = "windowActions">
+        <vbox spacing = "true">
+
+            <grid id="grid" margin="true" spacing="true" expandable="false" stylename="edit-area">
+                <columns>
+                    <column flex="1"/>
+                    <column flex="1"/>
+                </columns>
+                <rows>
+                    <row>
+                        <label value="msg://republic"/>
+                        <actionsField id = "republic"
+                                      property="republic"
+                                      datasource="villaDs"
+                                      optionsDatasource="republicDs"
+                                      lookupScreen="ext$Republic.browse"
+                                      width="${300}"
+                                      required = "true"
+                                      dropdown="true"
+                                      open="true"
+                                      lookup="true"/>
+                    </row>
+
+                    <row>
+                        <label value="msg://aread"/>
+                        <actionsField id = "aread"
+                                      property="aread"
+                                      datasource="villaDs"
+                                      optionsDatasource="areadDs"
+                                      lookupScreen="ext$Aread.browse"
+                                      width="${300}"
+                                      required = "true"
+                                      dropdown="true"
+                                      open="true"
+                                      lookup="true"/>
+                    </row>
+                    <row>
+                        <label value="msg://villaname"/>
+                        <textField id = "villaname"
+                                   datasource = "villaDs"
+                                   property="villaname"
+                                   width="${300}"
+                                   required = "true"/>
+                    </row>
+
+                    <!--<row>
+                        <label value="msg://individual"/>
+                        <actionsField id = "individual"
+                                      property="individual"
+                                      datasource="villaDs"
+                                      optionsDatasource="individualDs"
+                                      lookupScreen="df$Individual.browse"
+                                      width="${300}"
+                                      required = "true"
+                                      dropdown="true"
+                                      open="true"
+                                      lookup="true"/>
+                    </row>
+
+                        -->
+                    <row>
+                        <label value="msg://typeVilla"/>
+                        <optionsGroup id="typeVilla" datasource="villaDs" property="typeVilla"/>
+                    </row>
+
+                    <row>
+                        <label value="msg://areaCenter"/>
+                        <checkBox id="areaCenter"
+                                  datasource="villaDs"
+                                  property="areaCenter"
+                                  width="${300}"/>
+                    </row>
+                </rows>
+            </grid>
+
+        </vbox>
+        <iframe id = "windowActions"
+                src = "/com/haulmont/cuba/gui/edit-window.actions.xml"/>
+    </layout>
+</window>
