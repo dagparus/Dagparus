@@ -57,6 +57,6 @@ public class CompanyExt extends Company{
     }
 
     public void setParentCompanyExt(CompanyExt parentCompanyExt) {
-    this.parentCompanyExt = parentCompanyExt;
+        this.parentCompanyExt = parentCompanyExt;
     }
 }
