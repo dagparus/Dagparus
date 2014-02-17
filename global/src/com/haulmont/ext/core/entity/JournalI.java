@@ -77,7 +77,6 @@ public class JournalI extends StandardEntity {
         this.statusI = statusI;
     }
 
-
     public String getNumberJI() {
         return numberJI;
     }
