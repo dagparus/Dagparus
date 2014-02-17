@@ -37,7 +37,6 @@ public class CallGeneratorNumberServiceBean implements CallGeneratorNumberServic
     public String getNextNumber(Call call) {
         Transaction tx = persistence.createTransaction();
         try {
-            //DeptConfig config = ConfigProvider.getConfig(DeptConfig.class);
             String numeratorName = "Звонки";
             String num = null;
             if (StringUtils.isNotBlank(numeratorName)) {
