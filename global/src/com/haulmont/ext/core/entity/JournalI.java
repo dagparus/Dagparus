@@ -37,6 +37,7 @@ public class JournalI extends StandardEntity {
     @Column(name = "NUMBER_JI", length = 20)
     private String numberJI;
 
+
     public Date getDateJI() {
         return dateJI;
     }
