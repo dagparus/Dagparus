@@ -42,7 +42,7 @@
                     <column id="nameContract"/>
                     <column id="price" editable="false"/>
                     <column id="count" editable="true"/>
-                    <column id="total"/>
+                    <column id="total" editable="false"/>
                 </columns>
                 <rows datasource = "modullDs"/>
             </table>
