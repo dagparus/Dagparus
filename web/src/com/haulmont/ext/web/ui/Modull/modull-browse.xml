@@ -38,11 +38,11 @@
             <table id = "modullTable" editable="true">
                 <rowsCount/>
                 <columns>
-                    <column id="name" editable="true"/>
-                    <column id="nameContract" editable="true"/>
-                    <column id="price" editable="false"/>
-                    <column id="count" editable="true"/>
-                    <column id="total" editable="false"/>
+                    <column id="name"/>
+                    <column id="nameContract"/>
+                    <column id="price"/>
+                    <column id="count"/>
+                    <column id="total"/>
                 </columns>
                 <rows datasource = "modullDs"/>
             </table>
