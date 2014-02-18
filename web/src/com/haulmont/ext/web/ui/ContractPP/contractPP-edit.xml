@@ -134,7 +134,6 @@
                                                 <lookupField id = "nameContract"
                                                              datasource="cardDs"
                                                              property="nameContract"
-                                                             required = "true"
                                                              width="300"/>
                                             </row>
                                             <row>
