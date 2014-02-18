@@ -38,7 +38,7 @@
             <table id = "modullTable" editable="true">
                 <rowsCount/>
                 <columns>
-                    <column id="name"/>
+                    <column id="name" editable="true"/>
                     <column id="nameContract"/>
                     <column id="price" editable="false"/>
                     <column id="count" editable="true"/>
