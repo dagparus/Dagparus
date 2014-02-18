@@ -40,7 +40,7 @@
                 <columns>
                     <column id="name"/>
                     <column id="nameContract"/>
-                    <column id="price" editable="true"/>
+                    <column id="price" editable="false"/>
                     <column id="count"/>
                     <column id="total"/>
                 </columns>
