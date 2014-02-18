@@ -199,6 +199,16 @@
                                             </row>
 
                                             <row>
+                                                <label id="dateClose"
+                                                       value="msg://dateClose"/>
+                                                <dateField id="dateClose"
+                                                           datasource="cardDs"
+                                                           property="dateClose"
+                                                           width="${width}"/>
+
+                                            </row>
+
+                                            <row>
                                                     <label value="msg://villa"/>
                                                     <actionsField id="villa"
                                                                   datasource="cardDs"
@@ -222,10 +232,11 @@
                          caption="msg://modullTab"
                          lazy="true">
                         <vbox height="100%" margin="true" expand="modullTable" spacing="true">
-                            <table id="modullTable" editable="false" multiselect="true">
+                            <table id="modullTable" editable="true" multiselect="true">
                                 <buttonsPanel>
                                     <button id="add" action="modullTable.add" icon="icons/create.png"/>
                                     <button id="delete" action="modullTable.remove" icon="icons/remove.png"/>
+                                    <button id="saveBtn" caption="msg://saveBtn" icon="icons/ok.png" invoke="save"/>
                                 </buttonsPanel>
                                 <columns>
                                     <column id="modull.name" caption="msg://modullName"/>

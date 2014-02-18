@@ -16,6 +16,7 @@ import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.components.actions.ExcelAction;
 import com.haulmont.cuba.gui.components.actions.ListActionType;
 import com.haulmont.cuba.gui.components.actions.RefreshAction;
+import com.haulmont.cuba.gui.data.DsContext;
 import com.haulmont.cuba.security.entity.EntityOp;
 import com.haulmont.cuba.security.entity.Role;
 import com.haulmont.cuba.security.entity.User;
@@ -47,6 +48,9 @@ public class ModullBrowser  extends AbstractLookup {
     @Inject
     protected Component verificationactsPanel;
 
+    @Inject
+    protected DsContext dsContext;
+
     public ModullBrowser(IFrame frame) {
         super(frame);
     }
@@ -67,5 +71,10 @@ public class ModullBrowser  extends AbstractLookup {
         modullTable.addAction(new RefreshAction(modullTable));
         modullTable.addAction(new ThesisExcelAction(modullTable,
                 new WebExportDisplay(), genericFilter));
+    }
+
+    public void save() {
+        dsContext.commit();
+        showNotification("Данные сохранены", NotificationType.HUMANIZED);
     }
 }

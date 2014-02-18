@@ -32,15 +32,16 @@
                 <button action="modullTable.edit" icon="icons/edit.png"/>
                 <button action="modullTable.remove" icon="icons/remove.png"/>
                 <button action="modullTable.refresh" icon="icons/refresh.png"/>
+                <button id="saveBtn" caption="msg://saveBtn" icon="icons/ok.png" invoke="save"/>
             </hbox>
 
-            <table id = "modullTable">
+            <table id = "modullTable" editable="true">
                 <rowsCount/>
                 <columns>
                     <column id="name"/>
                     <column id="nameContract"/>
-                    <column id="price" editable="true"/>
-                    <column id="count" editable = "true"/>
+                    <column id="price"/>
+                    <column id="count"/>
                     <column id="total"/>
                 </columns>
                 <rows datasource = "modullDs"/>

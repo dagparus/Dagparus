@@ -69,6 +69,17 @@ public class ContractPP extends Doc {
     @Column (name = "DATE_CONTR")
     private Date dateContr;
 
+    public Date getDateClose() {
+        return dateClose;
+    }
+
+    public void setDateClose(Date dateClose) {
+        this.dateClose = dateClose;
+    }
+
+    @Column (name = "DATECLOSE")
+    private Date dateClose;
+
     @Column (name = "AMOUNT")
     private String amount;
 

@@ -14,7 +14,7 @@ import com.haulmont.cuba.gui.components.actions.RemoveAction;
 import com.haulmont.cuba.gui.data.CollectionDatasource;
 import com.haulmont.cuba.gui.data.Datasource;
 import com.haulmont.cuba.gui.data.DsContext;
-import com.haulmont.cuba.gui.data.impl.DatasourceImplementation;
+import com.haulmont.cuba.gui.data.impl.*;
 import com.haulmont.cuba.gui.report.ReportHelper;
 import com.haulmont.cuba.report.Report;
 import com.haulmont.cuba.security.entity.EntityOp;
@@ -22,9 +22,6 @@ import com.haulmont.cuba.security.entity.User;
 import com.haulmont.cuba.security.entity.UserRole;
 import com.haulmont.docflow.core.app.ThesisConstants;
 import com.haulmont.cuba.gui.data.HierarchicalDatasource;
-import com.haulmont.cuba.gui.data.impl.CollectionDatasourceImpl;
-import com.haulmont.cuba.gui.data.impl.CollectionDsListenerAdapter;
-import com.haulmont.cuba.gui.data.impl.CollectionPropertyDatasourceImpl;
 import com.haulmont.cuba.web.App;
 import com.haulmont.cuba.web.gui.components.WebButton;
 import com.haulmont.cuba.web.gui.components.WebVBoxLayout;
@@ -69,8 +66,15 @@ public class ContractPPEditor extends AbstractCardEditor {
 
     private boolean key = false;
 
+    protected DateField dateContr;
+
+    protected DateField dateClose;
+
     @Inject
     protected Table modullTable;
+
+    @Inject
+    protected DsContext dsContext;
 
     @Inject
     protected CollectionDatasource<CardProc, UUID> cardProcDs;
@@ -157,6 +161,22 @@ public class ContractPPEditor extends AbstractCardEditor {
         //если вложения есть, то в название закладки
         //добавляется число вложений
         //в данной карточке
+
+        cardDs.addListener(new DsListenerAdapter() {
+            public void valueChanged(Entity source, String property, Object prevValue, Object value) {
+                Datasource cardDs = getDsContext().get("cardDs");
+                dateContr = getComponent("dateContr");
+                dateClose = getComponent("dateClose");
+
+                Date dateValue = dateContr.getValue();
+                if (dateValue != null){
+                    GregorianCalendar calendar = new GregorianCalendar();
+                    calendar.setTime(dateValue);
+                    calendar.add(GregorianCalendar.YEAR, 1);
+                    dateClose.setValue(calendar.getTime());
+                }  }
+        });
+
         attachmentsDs.addListener(new CollectionDsListenerAdapter() {
             @Override
             public void collectionChanged(CollectionDatasource ds, Operation operation) {
@@ -220,7 +240,6 @@ public class ContractPPEditor extends AbstractCardEditor {
                 }
                 contractPP.setAmount(String.valueOf(summ));
                 contractPP.setTextAmount((TextNumber.start(summ)).trim());
-
             }
         });
 
@@ -532,6 +551,12 @@ public class ContractPPEditor extends AbstractCardEditor {
         boolean isNew = PersistenceHelper.isNew(cardDs.getItem());
         return true;
 
+    }
+
+    public void save() {
+        dsContext = cardDs.getDsContext();
+        dsContext.commit();
+        showNotification("Данные сохранены", NotificationType.HUMANIZED);
     }
 
     @Override
