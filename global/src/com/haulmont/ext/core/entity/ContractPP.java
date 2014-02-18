@@ -27,9 +27,25 @@ public class ContractPP extends Doc {
     @JoinColumn(name = "COMPANY_ID")
     protected CompanyExt extCompany;
 
+    public CompanyExt getExtCompany() {
+        return extCompany;
+    }
+
+    public void setExtCompany(CompanyExt extCompany) {
+        this.extCompany = extCompany;
+    }
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "CLIENT_ID")
     protected ExtClient client;
+
+    public ExtClient getClient() {
+        return client;
+    }
+
+    public void setClient(ExtClient client) {
+        this.client = client;
+    }
 
     @OneToMany(mappedBy = "contractPP")
     @Aggregation
@@ -41,14 +57,6 @@ public class ContractPP extends Doc {
 
     public void setModull(LinkedHashSet<ContractppModull> modull) {
         this.modull = modull;
-    }
-
-    public CompanyExt getExtCompany() {
-        return extCompany;
-    }
-
-    public void setExtCompany(CompanyExt extCompany) {
-        this.extCompany = extCompany;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -66,8 +74,27 @@ public class ContractPP extends Doc {
     @Column (name ="NUMBER")
     private String number;
 
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
     @Column (name = "DATE_CONTR")
     private Date dateContr;
+
+    public Date getDateContr() {
+        return dateContr;
+    }
+
+    public void setDateContr(Date dateContr) {
+        this.dateContr = dateContr;
+    }
+
+    @Column (name = "DATECLOSE")
+    private Date dateClose;
 
     public Date getDateClose() {
         return dateClose;
@@ -77,11 +104,19 @@ public class ContractPP extends Doc {
         this.dateClose = dateClose;
     }
 
-    @Column (name = "DATECLOSE")
-    private Date dateClose;
-
     @Column (name = "AMOUNT")
     private String amount;
+
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    @Column (name = "TEXTAMOUNT")
+    private String textAmount;
 
     public String getTextAmount() {
         return textAmount;
@@ -91,8 +126,9 @@ public class ContractPP extends Doc {
         this.textAmount = textAmount;
     }
 
-    @Column (name = "TEXTAMOUNT")
-    private String textAmount;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "VILLA_ID")
+    protected Villa villa;
 
     public Villa getVilla() {
         return villa;
@@ -101,10 +137,6 @@ public class ContractPP extends Doc {
     public void setVilla(Villa villa) {
         this.villa = villa;
     }
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "VILLA_ID")
-    protected Villa villa;
 
     @Column (name = "NAMECONTRACT")
     private String nameContract;
@@ -115,37 +147,5 @@ public class ContractPP extends Doc {
 
     public void setNameContract(String nameContract) {
         this.nameContract = nameContract;
-    }
-
-    public ExtClient getClient() {
-        return client;
-    }
-
-    public void setClient(ExtClient client) {
-        this.client = client;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public Date getDateContr() {
-        return dateContr;
-    }
-
-    public void setDateContr(Date dateContr) {
-        this.dateContr = dateContr;
-    }
-
-    public String getAmount() {
-        return amount;
-    }
-
-    public void setAmount(String amount) {
-        this.amount = amount;
     }
 }
