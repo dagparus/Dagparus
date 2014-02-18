@@ -21,6 +21,7 @@ import java.util.LinkedHashSet;
 @NamePattern("%s|number")
 @TrackEditScreenHistory
 public class ContractPP extends Doc {
+
     private static final long serialVersionUID = -5772794459098915083L;
 
     @ManyToOne(fetch = FetchType.LAZY)
