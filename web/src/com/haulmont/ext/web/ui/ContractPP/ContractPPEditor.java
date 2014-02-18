@@ -35,6 +35,7 @@ import com.haulmont.docflow.web.ui.common.DocTypeSelector;
 import com.haulmont.ext.core.entity.ContractPP;
 import com.haulmont.ext.core.entity.ContractppModull;
 import com.haulmont.ext.core.entity.ExtModull;
+import com.haulmont.ext.core.entity.Villa;
 import com.haulmont.ext.web.ui.Modull.ModullFrame;
 import com.haulmont.taskman.web.ui.common.*;
 import com.haulmont.workflow.core.entity.*;
@@ -71,6 +72,9 @@ public class ContractPPEditor extends AbstractCardEditor {
     protected DateField dateClose;
 
     @Inject
+    protected ActionsField villa;
+
+    @Inject
     protected Table modullTable;
 
     @Inject
@@ -99,6 +103,9 @@ public class ContractPPEditor extends AbstractCardEditor {
 
     @Inject
     protected CollectionPropertyDatasourceImpl cardProjectsDs;
+
+    @Inject
+    Datasource cardDs;
 
     @Inject
     protected DataService cuba_DataService;
@@ -342,6 +349,15 @@ public class ContractPPEditor extends AbstractCardEditor {
 
         //получение сущности
         ContractPP contractPP = (ContractPP) getItem();
+
+        Datasource cardDs = getDsContext().get("cardDs");
+        villa = getComponent("villa");
+        LoadContext ltx = new LoadContext(Villa.class);
+        ltx.setQueryString("select v from ext$Villa v where v.villaname = :nameVilla")
+                .addParameter("nameVilla", "г.Махачкала");
+        ltx.setView("edit");
+        Villa villa = cuba_DataService.load(ltx);
+        this.villa.setValue(villa);
 
         initAttachments(contractPP);
 
