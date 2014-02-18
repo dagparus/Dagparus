@@ -8,6 +8,7 @@ import com.haulmont.cuba.core.entity.annotation.TrackEditScreenHistory;
 import com.haulmont.cuba.security.entity.UserRole;
 import com.haulmont.docflow.core.entity.Company;
 import com.haulmont.docflow.core.entity.Doc;
+import com.haulmont.ext.core.entity.Enum.ContractDocType;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -139,13 +140,13 @@ public class ContractPP extends Doc {
     }
 
     @Column (name = "NAMECONTRACT")
-    private String nameContract;
+    private String nameContract = ContractDocType.LICENSE_SERVICE.getId();
 
-    public String getNameContract() {
-        return nameContract;
+    public ContractDocType getNameContract() {
+        return ContractDocType.fromId(nameContract);
     }
 
-    public void setNameContract(String nameContract) {
-        this.nameContract = nameContract;
+    public void setNameContract(ContractDocType nameContract) {
+        this.nameContract = nameContract == null ? null : nameContract.getId();
     }
 }

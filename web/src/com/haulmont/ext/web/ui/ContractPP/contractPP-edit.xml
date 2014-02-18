@@ -131,10 +131,11 @@
                                             <row>
                                                 <label id="nameContract"
                                                        value="msg://nameContract"/>
-                                                <textField id="nameContract"
-                                                           datasource="cardDs"
-                                                           property="nameContract"
-                                                           width="${width}"/>
+                                                <lookupField id = "nameContract"
+                                                             datasource="cardDs"
+                                                             property="nameContract"
+                                                             required = "true"
+                                                             width="300"/>
                                             </row>
                                             <row>
                                                 <label id="amount"
