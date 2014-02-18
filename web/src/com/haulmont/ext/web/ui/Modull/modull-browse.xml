@@ -39,7 +39,7 @@
                 <rowsCount/>
                 <columns>
                     <column id="name" editable="true"/>
-                    <column id="nameContract"/>
+                    <column id="nameContract" editable="true"/>
                     <column id="price" editable="false"/>
                     <column id="count" editable="true"/>
                     <column id="total" editable="false"/>
