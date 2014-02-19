@@ -208,6 +208,16 @@
 
                                             </row>
 
+
+                                            <row>
+                                                <label id="nameOrganisation"
+                                                       value="msg://nameOrganisation"/>
+                                                <lookupField id = "nameOrganisation"
+                                                             datasource="cardDs"
+                                                             property="nameOrganisation"
+                                                             width="300"/>
+                                            </row>
+
                                             <row>
                                                     <label value="msg://villa"/>
                                                     <actionsField id="villa"

@@ -9,6 +9,7 @@ import com.haulmont.cuba.security.entity.UserRole;
 import com.haulmont.docflow.core.entity.Company;
 import com.haulmont.docflow.core.entity.Doc;
 import com.haulmont.ext.core.entity.Enum.ContractDocType;
+import com.haulmont.ext.core.entity.Enum.NameOrganisationEnum;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -148,5 +149,15 @@ public class ContractPP extends Doc {
 
     public void setNameContract(ContractDocType nameContract) {
         this.nameContract = nameContract == null ? null : nameContract.getId();
+    }
+    @Column(name = "NAMEORGANISATION")
+    private String nameOrganisation = NameOrganisationEnum.PARUS.getId();
+
+    public NameOrganisationEnum getNameOrganisation() {
+        return NameOrganisationEnum.fromId(nameOrganisation);
+    }
+
+    public void setNameOrganisation(NameOrganisationEnum nameOrganisation) {
+        this.nameOrganisation = nameOrganisation == null ? null : nameOrganisation.getId();
     }
 }
