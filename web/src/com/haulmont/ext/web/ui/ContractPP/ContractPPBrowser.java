@@ -181,10 +181,13 @@ public class ContractPPBrowser extends AbstractLookup {
 
         @Override
         public void actionPerform(Component component) {
+            ContractPP entity = contractPPDs.getItem();
+            Map<String, Object> entites = new HashMap<String, Object>();
+            entites.put("entity", entity);
             Report report = loadReport(MessageProvider.getMessage(ContractPPEditor.class, reportName));
             report = getDsContext().getDataService().reload(report, "report.edit");
             //openWindow("report$inputParameters", WindowManager.OpenType.DIALOG, Collections.<String, Object>singletonMap("report", report));
-            ReportHelper.runReport(report, ContractPPBrowser.this);
+            ReportHelper.printReport(report, entites);
         }
     }
 
