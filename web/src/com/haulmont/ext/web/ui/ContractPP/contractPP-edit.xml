@@ -134,7 +134,7 @@
                                                 <lookupField id = "nameContract"
                                                              datasource="cardDs"
                                                              property="nameContract"
-                                                             width="300"/>
+                                                             width="${width}"/>
                                             </row>
                                             <row>
                                                 <label id="amount"
@@ -236,13 +236,12 @@
                                 <buttonsPanel>
                                     <button id="add" action="modullTable.add" icon="icons/create.png"/>
                                     <button id="delete" action="modullTable.remove" icon="icons/remove.png"/>
-                                    <button id="saveBtn" caption="msg://saveBtn" icon="icons/ok.png" invoke="save"/>
                                 </buttonsPanel>
                                 <columns>
                                     <column id="modull.name" caption="msg://modullName"/>
-                                    <column id="modull.count" caption="msg://modullCount"/>
                                     <column id="modull.price" caption="msg://modullPrice"/>
-                                    <column id="modull.total" caption="msg://modullTotal"/>
+                                    <column id="count" caption="msg://count" editable = "true"/>
+                                    <column id="totalCost" caption="msg://totalCost" editable = "true"/>
                                     <!--  <column id="totalCost" caption="msg://modullTotalCost"/>-->
                                 </columns>
                                 <rows datasource="modullDs"/>

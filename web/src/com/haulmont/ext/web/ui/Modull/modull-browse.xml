@@ -41,8 +41,6 @@
                     <column id="name"/>
                     <column id="nameContract"/>
                     <column id="price"/>
-                    <column id="count"/>
-                    <column id="total"/>
                 </columns>
                 <rows datasource = "modullDs"/>
             </table>

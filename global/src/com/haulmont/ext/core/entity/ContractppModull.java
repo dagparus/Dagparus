@@ -10,11 +10,8 @@ import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 import com.haulmont.cuba.core.entity.annotation.SystemLevel;
 import com.haulmont.cuba.core.global.DeletePolicy;
-import com.haulmont.cuba.security.entity.Role;
-import com.haulmont.cuba.security.entity.User;
 
 import javax.persistence.*;
-import java.util.UUID;
 
 @Entity(name = "ext$ContractModull")
 @Table(name = "EXT_CONTRACTMODULL")
@@ -33,6 +30,28 @@ public class ContractppModull extends StandardEntity {
     @OnDeleteInverse(DeletePolicy.CASCADE)
     private ExtModull modull;
 
+    @Column(name = "COUNT")
+    private String count;
+
+    @Column (name = "TOTAL_COST")
+    private String totalCost;
+
+    public String getTotalCost() {
+        return totalCost;
+    }
+
+    public void setTotalCost(String totalCost) {
+        this.totalCost = totalCost;
+    }
+
+    public String getCount() {
+        return count;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
+    }
+
     public ContractPP getContractPP() {
         return contractPP;
     }
@@ -48,6 +67,5 @@ public class ContractppModull extends StandardEntity {
     public void setModull(ExtModull modull) {
         this.modull = modull;
     }
-
 
 }

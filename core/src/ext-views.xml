@@ -176,9 +176,7 @@
     <view class="com.haulmont.ext.core.entity.ContractppModull" name="browse" extends="_local">
         <property name="modull" view="browse">
             <property name="name"/>
-            <property name="count"/>
             <property name="price"/>
-            <property name="total"/>
         </property>
     </view>
 

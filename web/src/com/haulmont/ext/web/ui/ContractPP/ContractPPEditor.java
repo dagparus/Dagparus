@@ -236,12 +236,13 @@ public class ContractPPEditor extends AbstractCardEditor {
                             tab.setCaption(getMessage("modullTab"));
                     }
                 }
+
                 ContractPP contractPP = (ContractPP) cardDs.getItem();
                 int summ = 0;
                 if (contractPP.getModull() != null) {
                     for (ContractppModull contractppModull : contractPP.getModull()) {
                         if (contractppModull.getModull() != null) {
-                            summ += Integer.parseInt(contractppModull.getModull().getTotal());
+                            summ += Integer.parseInt(contractppModull.getTotalCost());
                         }
                     }
                 }
@@ -250,6 +251,25 @@ public class ContractPPEditor extends AbstractCardEditor {
             }
         });
 
+        modullDs.addListener(new DsListenerAdapter() {
+            public void valueChanged(Object source, String property, Object prevValue, Object value) {
+                ContractppModull contractppModull = modullDs.getItem();
+                if ("count".equals(property)) {
+                        contractppModull.setTotalCost(String.valueOf(Integer.parseInt(contractppModull.getCount()) * Integer.parseInt(contractppModull.getModull().getPrice())));
+                }
+                ContractPP contractPP = (ContractPP) cardDs.getItem();
+                int summ = 0;
+                if (contractPP.getModull() != null) {
+                    for (ContractppModull iContractppModull : contractPP.getModull()) {
+                        if (iContractppModull.getModull() != null) {
+                            summ += Integer.parseInt(iContractppModull.getTotalCost());
+                        }
+                    }
+                }
+                contractPP.setAmount(String.valueOf(summ));
+                contractPP.setTextAmount((TextNumber.start(summ)).trim());
+            }
+        });
 
         //переопределение действия,которое будет происходить
         //при нажатии на кнопку поиска "родительской" карточки
@@ -569,12 +589,6 @@ public class ContractPPEditor extends AbstractCardEditor {
 
     }
 
-    public void save() {
-        dsContext = cardDs.getDsContext();
-        dsContext.commit();
-        showNotification("Данные сохранены", NotificationType.HUMANIZED);
-    }
-
     @Override
     public void commitAndClose() {
         if (_commit()) {
@@ -603,6 +617,8 @@ public class ContractPPEditor extends AbstractCardEditor {
                         ContractppModull contractppModull = dataService.newInstance(metaClass);
                         contractppModull.setModull(modull);
                         contractppModull.setContractPP((ContractPP) cardDs.getItem());
+                        contractppModull.setCount("0");
+                        contractppModull.setTotalCost("0");
                         modullDs.addItem(contractppModull);
                         existingModullNames.add(modull.getName());
                     }

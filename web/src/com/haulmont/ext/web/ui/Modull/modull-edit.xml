@@ -34,19 +34,10 @@
                     <row>
                         <label id="nameContract"
                                value="msg://nameContract"/>
-                        <textField id="nameContract"
-                                   datasource="modullDs"
-                                   property="nameContract"
-                                   width="${width}"/>
-
-                    </row>
-                    <row>
-                        <label id="count"
-                               value="msg://count"/>
-                        <textField id="count"
-                                   datasource="modullDs"
-                                   property="count"
-                                   width="${width}"/>
+                        <lookupField id = "nameContract"
+                                     datasource="cardDs"
+                                     property="nameContract"
+                                     width="${width}"/>
                     </row>
                     <row>
                         <label id="price"
@@ -55,24 +46,6 @@
                                    datasource="modullDs"
                                    property="price"
                                    width="${width}"/>
-                    </row>
-                   <!-- <row>
-                        <label id="totalCost"
-                               value="msg://totalCost"/>
-                        <textField id="totalCost"
-                                   datasource="modullDs"
-                                   property="totalCost"
-                                   width="${width}"/>
-                    </row>      -->
-
-                    <row>
-                        <label id="total"
-                               value="msg://total"/>
-                        <textField id="total"
-                                   datasource="modullDs"
-                                   property="total"
-                                   width="${width}"/>
-
                     </row>
 
                 </rows>
