@@ -34,6 +34,7 @@ import com.haulmont.docflow.web.DocflowAppWindow;
 import com.haulmont.docflow.web.ui.common.DocTypeSelector;
 import com.haulmont.ext.core.entity.ContractPP;
 import com.haulmont.ext.core.entity.ContractppModull;
+import com.haulmont.ext.core.entity.Enum.ContractDocType;
 import com.haulmont.ext.core.entity.ExtModull;
 import com.haulmont.ext.core.entity.Villa;
 import com.haulmont.ext.web.ui.Modull.ModullFrame;
@@ -392,20 +393,24 @@ public class ContractPPEditor extends AbstractCardEditor {
                             .getCurrentOrSubstitutedUser());
 
             //установка вида документа:
-            LoadContext ctx = new LoadContext(DocKind.class);
+        /*    LoadContext ctx = new LoadContext(DocKind.class);
             ctx.setQueryString("select dk from df$DocKind dk where dk.docType = " +
                     "(select dt from df$DocType dt where dt.name = :typeName)")
                     .addParameter("typeName", "ext$ContractPP");
             ctx.setView("edit");
             DocKind docKind = cuba_DataService.load(ctx);
-            contractPP.setDocKind(docKind);
+            contractPP.setDocKind(docKind);    */
 
             //установка времени
             contractPP.setDateTime(TimeProvider.currentTimestamp());
+            //установка вида документа
+            if (contractPP.getDocKind().getName().equals("Лицензионное обслуживание")) contractPP.setNameContract(ContractDocType.fromId("LS"));
+            else if (contractPP.getDocKind().getName().equals("Оказание услуг")) contractPP.setNameContract(ContractDocType.fromId("PS"));
+            else if (contractPP.getDocKind().getName().equals("Поставка экземпляра")) contractPP.setNameContract(ContractDocType.fromId("PD"));
 
             //если нумератор, подключенный к данной карточке
             //имеет тип "При создании"
-            if (NumeratorType.ON_CREATE.equals(contractPP.getDocKind().getNumeratorType())) {
+          /*  if (NumeratorType.ON_CREATE.equals(contractPP.getDocKind().getNumeratorType())) {
                 //то получаем данный нумератор
                 //получение номера из последовательности
                 String num = docflow_NumerationService.getNextNumber(contractPP);
@@ -413,7 +418,7 @@ public class ContractPPEditor extends AbstractCardEditor {
                     //с помощью метода доступа
                     //проставляем номер в документ
                     contractPP.setNumber(num);
-            }
+            }                            */
 
             //проставление "родительской" карточки в текущую
             Card parentCard = ((Doc) item).getParentCard();
@@ -617,8 +622,8 @@ public class ContractPPEditor extends AbstractCardEditor {
                         ContractppModull contractppModull = dataService.newInstance(metaClass);
                         contractppModull.setModull(modull);
                         contractppModull.setContractPP((ContractPP) cardDs.getItem());
-                        contractppModull.setCount("0");
-                        contractppModull.setTotalCost("0");
+                        contractppModull.setCount("1");
+                        contractppModull.setTotalCost(modull.getPrice());
                         modullDs.addItem(contractppModull);
                         existingModullNames.add(modull.getName());
                     }
