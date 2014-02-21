@@ -90,6 +90,28 @@ public class ExtClient extends StandardEntity {
     @Column(name = "NAME", length = 100)
     private String name;
 
+    @Column(name = "TREASURYDEPARTMENT", length = 100)
+    private String treasuryDepartment;
+
+    @Column(name = "POST_R", length = 100)
+    private String postR;
+
+    public String getTreasuryDepartment() {
+        return treasuryDepartment;
+    }
+
+    public void setTreasuryDepartment(String treasuryDepartment) {
+        this.treasuryDepartment = treasuryDepartment;
+    }
+
+    public String getPostR() {
+        return postR;
+    }
+
+    public void setPostR(String postR) {
+        this.postR = postR;
+    }
+
     public String getName() {
         return name;
     }

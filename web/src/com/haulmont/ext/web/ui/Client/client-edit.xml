@@ -187,6 +187,16 @@
                                            required = "false"
                                            width="300"/>
                             </row>
+
+                            <row>
+                                <label value="msg://postR"/>
+                                <textField id = "postR"
+                                           datasource="ClientDs"
+                                           property="postR"
+                                           required = "false"
+                                           width="300"/>
+                            </row>
+
                         </rows>
                     </grid>
                 </vbox>
@@ -262,6 +272,15 @@
                                width="300"
                                required="false"/>
                     </row>
+
+                      <row>
+                          <label value="msg://treasuryDepartment"/>
+                          <textField id="treasuryDepartment"
+                                     datasource="ClientDs"
+                                     property="treasuryDepartment"
+                                     width="300"
+                                     required="false"/>
+                      </row>
 
                   </rows>
                     </grid>
