@@ -82,12 +82,19 @@ public class LoadClientServiceBean implements LoadClientService {
             }
 
             String[] companyS = new String[6];
-            companyS[0] = l[5];
-            companyS[1] = l[6];
-            companyS[2] = l[7];
-            companyS[3] = l[8];
-            companyS[4] = l[9];
-            companyS[5] = l[10];
+            try {
+                companyS[0] = l[5];
+                companyS[1] = l[6];
+                companyS[2] = l[7];
+                companyS[3] = l[8];
+                companyS[4] = l[9];
+                companyS[5] = l[10];
+            } catch (Exception e)  {
+                if (companyS[2] == null) {
+                    companyS[2] = "";
+                }
+                //И дальше...
+            }
             if (!companyS[1].equals("") && companyS[2].equals(""))
                 companyExt = createCompany(companyS, villa, null);
             if (!companyS[1].equals("") && !companyS[2].equals(""))
@@ -210,11 +217,15 @@ public class LoadClientServiceBean implements LoadClientService {
         CompanyExt companyExt = new CompanyExt();
         try {
             EntityManager em = persistance.getEntityManager();
-            companyExt.setFullName(lineS[0]);
-            companyExt.setName(lineS[1]);
-            companyExt.setPostalAddress(lineS[3]);
-            companyExt.setLegalAddress(lineS[4]);
-            companyExt.setOkpo(lineS[5]);
+            try {
+                companyExt.setFullName(lineS[0]);
+                companyExt.setName(lineS[1]);
+                companyExt.setPostalAddress(lineS[3]);
+                companyExt.setLegalAddress(lineS[4]);
+                companyExt.setOkpo(lineS[5]);
+            } catch (Exception e) {
+                // Дальше, дальше...
+            }
             companyExt.setRepublic(villa.getRepublic());
             if (villa.getAread() != null) companyExt.setAread(villa.getAread());
             if (villa != null) companyExt.setVilla(villa);
