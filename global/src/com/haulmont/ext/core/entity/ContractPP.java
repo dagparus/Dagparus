@@ -8,6 +8,7 @@ import com.haulmont.cuba.core.entity.annotation.TrackEditScreenHistory;
 import com.haulmont.cuba.security.entity.UserRole;
 import com.haulmont.docflow.core.entity.Company;
 import com.haulmont.docflow.core.entity.Doc;
+import com.haulmont.docflow.core.entity.Organization;
 import com.haulmont.ext.core.entity.Enum.ContractDocType;
 import com.haulmont.ext.core.entity.Enum.NameOrganisationEnum;
 
@@ -150,14 +151,16 @@ public class ContractPP extends Doc {
     public void setNameContract(ContractDocType nameContract) {
         this.nameContract = nameContract == null ? null : nameContract.getId();
     }
-    @Column(name = "NAMEORGANISATION")
-    private String nameOrganisation = NameOrganisationEnum.PARUS.getId();
 
-    public NameOrganisationEnum getNameOrganisation() {
-        return NameOrganisationEnum.fromId(nameOrganisation);
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "ORGANIZATION_ID")
+    private Organization organisation;
+
+    public Organization getOrganisation() {
+        return organisation;
     }
 
-    public void setNameOrganisation(NameOrganisationEnum nameOrganisation) {
-        this.nameOrganisation = nameOrganisation == null ? null : nameOrganisation.getId();
+    public void setOrganisation(Organization organisation) {
+        this.organisation = organisation;
     }
 }

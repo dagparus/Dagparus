@@ -73,6 +73,14 @@
             </query>
         </collectionDatasource>
 
+        <collectionDatasource id = "organizationDs"
+                              class = "com.haulmont.docflow.core.entity.Organization">
+                              view = "browse">
+            <query>
+                select o from df$Organization o order by o.name
+            </query>
+        </collectionDatasource>
+
         <collectionDatasource id = "HeadDs"
                               class = "com.haulmont.ext.core.entity.ExtHead"
                               view = "browse"/>
@@ -208,14 +216,17 @@
 
                                             </row>
 
-
                                             <row>
-                                                <label id="nameOrganisation"
-                                                       value="msg://nameOrganisation"/>
-                                                <lookupField id = "nameOrganisation"
-                                                             datasource="cardDs"
-                                                             property="nameOrganisation"
-                                                             width="300"/>
+                                                <label value="msg://organization"/>
+                                                <actionsField id="organization"
+                                                              datasource="cardDs"
+                                                              property="organization"
+                                                              optionsDatasource="organizationDs"
+                                                              lookupScreen="df$Organization.browse"
+                                                              width="${width}"
+                                                              dropdown="true"
+                                                              lookup="true"
+                                                              open="true"/>
                                             </row>
 
                                             <row>

@@ -30,6 +30,7 @@ import com.haulmont.docflow.core.app.NumerationService;
 import com.haulmont.docflow.core.entity.Doc;
 import com.haulmont.docflow.core.entity.DocKind;
 import com.haulmont.docflow.core.entity.NumeratorType;
+import com.haulmont.docflow.core.entity.Organization;
 import com.haulmont.docflow.web.DocflowAppWindow;
 import com.haulmont.docflow.web.ui.common.DocTypeSelector;
 import com.haulmont.ext.core.entity.ContractPP;
@@ -381,6 +382,8 @@ public class ContractPPEditor extends AbstractCardEditor {
         this.villa.setValue(villa);
 
         initAttachments(contractPP);
+        Organization org = new Organization();
+        org.getAccounts().get(0);
 
         //блок для первоначальной инициализации новой карточки
         if (PersistenceHelper.isNew(contractPP)) {

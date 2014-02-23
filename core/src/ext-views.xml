@@ -55,6 +55,7 @@
         <property name="head" view="_minimal"/>
         <property name="modull" view="_minimal"/>
         <property name="villa" view="_minimal"/>
+        <property name="organization" view="_minimal"/>
     </view>
 
     <view class="com.haulmont.ext.core.entity.ContractPP" name="edit" extends="_local">
@@ -68,6 +69,7 @@
         <property name="extCompany" view="_minimal"/>
         <property name="client" view="_minimal"/>
         <property name="villa" view="_minimal"/>
+        <property name="organization" view="_minimal"/>
         <property name="head" view="_minimal"/>
         <property name="modull" view="browse"/>
 
