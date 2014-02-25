@@ -382,8 +382,6 @@ public class ContractPPEditor extends AbstractCardEditor {
         this.villa.setValue(villa);
 
         initAttachments(contractPP);
-        Organization org = new Organization();
-        org.getAccounts().get(0);
 
         //блок для первоначальной инициализации новой карточки
         if (PersistenceHelper.isNew(contractPP)) {
