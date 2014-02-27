@@ -12,6 +12,7 @@
                     view = "edit"/>
     </dsContext>
 
+
     <#assign width = 300>
     <layout expand = "windowActions">
         <vbox spacing = "true">
@@ -31,11 +32,11 @@
                                    width="${width}"/>
 
                     </row>
-                    <row>
+                   <row>
                         <label id="nameContract"
                                value="msg://nameContract"/>
                         <lookupField id = "nameContract"
-                                     datasource="cardDs"
+                                     datasource="modullDs"
                                      property="nameContract"
                                      width="${width}"/>
                     </row>

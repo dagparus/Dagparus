@@ -17,9 +17,9 @@
                 </buttonsPanel>
                 <columns>
                     <column id="name" caption="msg://modullName"/>
-                    <column id="count" caption="msg://modullCount"/>
+
                     <column id="price" caption="msg://modullPrice"/>
-                    <column id="total" caption="msg://modullTotal"/>
+
                   <!--  <column id="totalCost" caption="msg://modullTotalCost"/>-->
                 </columns>
                 <rows datasource="modullDs"/>

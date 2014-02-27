@@ -9,6 +9,7 @@ package com.haulmont.ext.core.entity;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.entity.annotation.EnableRestore;
+import com.haulmont.ext.core.entity.Enum.ContractDocType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,17 +27,17 @@ public class ExtModull extends StandardEntity{
     private String name;
 
     @Column (name = "NAMECONTRACT")
-    private String nameContract;
+    private String nameContract = ContractDocType.LICENSE_SERVICE.getId();
 
     @Column (name = "PRICE")
     private String price;
 
-    public String getNameContract() {
-        return nameContract;
+    public ContractDocType getNameContract() {
+        return ContractDocType.fromId(nameContract);
     }
 
-    public void setNameContract(String nameContract) {
-        this.nameContract = nameContract;
+    public void setNameContract(ContractDocType nameContract) {
+        this.nameContract = nameContract == null ? null : nameContract.getId();
     }
 
     public String getName() {

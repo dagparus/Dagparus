@@ -25,10 +25,6 @@ import java.util.Map;
  */
 public class ModullEditor extends AbstractEditor{
 
-    protected TextField countField;
-    protected TextField priceField;
-    protected TextField totalField;
-
     public ModullEditor(IFrame frame){
         super(frame);
     }
@@ -37,35 +33,8 @@ public class ModullEditor extends AbstractEditor{
         super.setItem(item);
     }
 
-    @Inject
-    protected Datasource modullDs;
-
     @Override
     public void init(Map<String, Object> params){
         super.init(params);
-        modullDs = getDsContext().get("modullDs");
-        countField = getComponent("count");
-        priceField = getComponent("price");
-        totalField = getComponent("total");
-
-        modullDs.addListener(new DsListenerAdapter(){
-            public void valueChanged(Object source, String property, Object prevValue, Object value){
-                String countValue = countField.getValue();
-                String priceValue = priceField.getValue();
-                String totalValue = totalField.getValue();
-                if ("price".equals(property)) {
-                    if(countValue != null){
-                        totalField.setValue(String.valueOf(Integer.parseInt(countValue) * Integer.parseInt(priceValue)));
-                    }
-                }
-                if ("count".equals(property)) {
-                    if(priceValue != null){
-                        totalField.setValue(String.valueOf(Integer.parseInt(countValue) * Integer.parseInt(priceValue)));
-                    }
-                }
-            };
-        });
-
-
-    }
+     }
 }

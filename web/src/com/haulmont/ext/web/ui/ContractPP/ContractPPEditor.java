@@ -382,8 +382,6 @@ public class ContractPPEditor extends AbstractCardEditor {
         this.villa.setValue(villa);
 
         initAttachments(contractPP);
-        Organization org = new Organization();
-        org.getAccounts().get(0);
 
         //блок для первоначальной инициализации новой карточки
         if (PersistenceHelper.isNew(contractPP)) {
@@ -410,6 +408,7 @@ public class ContractPPEditor extends AbstractCardEditor {
             if (contractPP.getDocKind().getName().equals("Лицензионное обслуживание")) contractPP.setNameContract(ContractDocType.fromId("LS"));
             else if (contractPP.getDocKind().getName().equals("Оказание услуг")) contractPP.setNameContract(ContractDocType.fromId("PS"));
             else if (contractPP.getDocKind().getName().equals("Поставка экземпляра")) contractPP.setNameContract(ContractDocType.fromId("PD"));
+            else if (contractPP.getDocKind().getName().equals("Договор на антивирус")) contractPP.setNameContract(ContractDocType.fromId("CA"));
 
             //если нумератор, подключенный к данной карточке
             //имеет тип "При создании"
