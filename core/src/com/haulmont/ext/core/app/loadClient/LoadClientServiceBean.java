@@ -246,7 +246,7 @@ public class LoadClientServiceBean implements LoadClientService {
             EntityManager em = persistance.getEntityManager();
             Query query = em.createQuery("select c from ext$CompanyExt c where c.name = ?1");
             query.setParameter(1, strCompanyExt);
-            companyExt =(CompanyExt) query.getSingleResult();
+            companyExt =(CompanyExt) query.getResultList().get(0);
             tx.commit();
         } finally {
             tx.end();
@@ -282,13 +282,15 @@ public class LoadClientServiceBean implements LoadClientService {
                 extClient.setSurnameR(lineS[9]);
                 extClient.setNameR(lineS[10]);
                 extClient.setPatronymicR(lineS[11]);
-                extClient.setBank(lineS[12]);
-                extClient.setInn(lineS[13]);
-                extClient.setKpp(lineS[14]);
-                extClient.setRs(lineS[15]);
-                extClient.setKs(lineS[16]);
-                extClient.setBik(lineS[17]);
-                extClient.setLs(lineS[18]);
+                extClient.setPostR(lineS[12]);
+                extClient.setBank(lineS[13]);
+                extClient.setInn(lineS[14]);
+                extClient.setKpp(lineS[15]);
+                extClient.setRs(lineS[16]);
+                extClient.setKs(lineS[17]);
+                extClient.setBik(lineS[18]);
+                extClient.setLs(lineS[19]);
+                extClient.setTreasuryDepartment(lineS[20]);
             }  catch (Exception e) {
                 //Не все так плохо, двигайся дальше...
             }
