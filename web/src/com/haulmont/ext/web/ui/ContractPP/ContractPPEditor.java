@@ -409,6 +409,7 @@ public class ContractPPEditor extends AbstractCardEditor {
             else if (contractPP.getDocKind().getName().equals("Оказание услуг")) contractPP.setNameContract(ContractDocType.fromId("PS"));
             else if (contractPP.getDocKind().getName().equals("Поставка экземпляра")) contractPP.setNameContract(ContractDocType.fromId("PD"));
             else if (contractPP.getDocKind().getName().equals("Договор на антивирус")) contractPP.setNameContract(ContractDocType.fromId("CA"));
+            else if (contractPP.getDocKind().getName().equals("Договор ЛО на антивирус")) contractPP.setNameContract(ContractDocType.fromId("CLA"));
 
             //если нумератор, подключенный к данной карточке
             //имеет тип "При создании"

@@ -172,6 +172,7 @@ public class ContractPPBrowser extends AbstractLookup {
             printButton.addAction(new ActionPrint("ContractOU"));
             printButton.addAction(new ActionPrint("ContractPI"));
             printButton.addAction(new ActionPrint("ContractppAV"));
+            printButton.addAction(new ActionPrint("Contractpp_LO_AV"));
         }
     }
 
