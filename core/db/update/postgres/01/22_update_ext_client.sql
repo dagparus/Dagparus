@@ -1,0 +1,1 @@
+alter table ext_client alter column post type varchar(100)^
