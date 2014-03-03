@@ -52,8 +52,8 @@
                             <button action="contractPPTable.refresh"/>
                             <button action="contractPPTable.remove" icon="icons/remove.png"/>
                             <popupButton id="printButton" icon="icons/print.png" caption="Печать" width="100%"/>
-                            <checkBox id="administration" caption="administration"/>
-                            <dateField id="dateCome" caption="dateCome"/>
+                            <dateField id="dateCome" caption="msg://dateCome" resolution="DAY"/>
+                            <checkBox id="administration" caption="msg://administration"/>
                             <!--<button action="contractPPTable.excel"/>-->
                          </buttonsPanel>
                         <rowsCount/>
