@@ -100,7 +100,7 @@ public class LoadClientServiceBean implements LoadClientService {
                 if (companyS[2] == null) {
                     companyS[2] = "";
                 }
-                //И дальше...
+                // дальше...
             }
             companyExt = findCompany(companyS[1]);
             if (companyExt == null) {
