@@ -19,6 +19,27 @@
     <screen id="ext$Modull.browse" template="/com/haulmont/ext/web/ui/Modull/modull-browse.xml"/>
     <screen id="ext$Modull.edit" template="/com/haulmont/ext/web/ui/Modull/modull-edit.xml"/>
 
+  <!--  <screen id="ext$Modull.LS.browse" template="/com/haulmont/ext/web/ui/Modull/modull-browse.xml">
+        <params>
+            <param name="genericFilter" value="Modull.Filter.LS"/>
+            <param name="[ext$Modull.browse].genericFilter" value="LS"/>
+        </params>
+    </screen>
+
+    <screen id="ext$Modull.PS.browse" template="/com/haulmont/ext/web/ui/Modull/modull-browse.xml">
+        <params>
+            <param name="genericFilter" value="Modull.Filter.PS"/>
+            <param name="[ext$Modull.browse].genericFilter" value="PS"/>
+        </params>
+    </screen>
+
+    <screen id="ext$Modull.PD.browse" template="/com/haulmont/ext/web/ui/Modull/modull-browse.xml">
+        <params>
+            <param name="genericFilter" value="Modull.Filter.PD"/>
+            <param name="[ext$Modull.browse].genericFilter" value="PD"/>
+        </params>
+    </screen>  -->
+
     <screen id="ext$Responsible.browse" template="/com/haulmont/ext/web/ui/Responsible/responsible-browse.xml"/>
     <screen id="ext$Responsible.edit" template="/com/haulmont/ext/web/ui/Responsible/responsible-edit.xml"/>
 
@@ -43,7 +64,6 @@
      <screen id="ext$Call.browse" template="/com/haulmont/ext/web/ui/Call/call-browse.xml"/>
 
     <screen id="loadClients" template="/com/haulmont/ext/web/ui/load/load-browse.xml"/>
-
 
     <screen id="ext$CompanyExt.browse" template="/com/haulmont/ext/web/ui/TreeCompany/companyExt-browse.xml"/>
     <screen id="ext$CompanyExt.lookup" template="/com/haulmont/ext/web/ui/TreeCompany/companyExt-lookup.xml"/>

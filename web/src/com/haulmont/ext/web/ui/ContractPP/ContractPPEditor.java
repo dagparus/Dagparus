@@ -15,11 +15,13 @@ import com.haulmont.cuba.gui.data.CollectionDatasource;
 import com.haulmont.cuba.gui.data.Datasource;
 import com.haulmont.cuba.gui.data.DsContext;
 import com.haulmont.cuba.gui.data.impl.*;
+import com.haulmont.cuba.gui.filter.QueryFilter;
 import com.haulmont.cuba.gui.report.ReportHelper;
 import com.haulmont.cuba.report.Report;
 import com.haulmont.cuba.security.entity.EntityOp;
 import com.haulmont.cuba.security.entity.User;
 import com.haulmont.cuba.security.entity.UserRole;
+import com.haulmont.cuba.web.gui.components.WebFilter;
 import com.haulmont.docflow.core.app.ThesisConstants;
 import com.haulmont.cuba.gui.data.HierarchicalDatasource;
 import com.haulmont.cuba.web.App;
@@ -38,6 +40,8 @@ import com.haulmont.ext.core.entity.ContractppModull;
 import com.haulmont.ext.core.entity.Enum.ContractDocType;
 import com.haulmont.ext.core.entity.ExtModull;
 import com.haulmont.ext.core.entity.Villa;
+import com.haulmont.ext.web.ui.Modull.ModullBrowser;
+import com.haulmont.ext.web.ui.Modull.ModullEditor;
 import com.haulmont.ext.web.ui.Modull.ModullFrame;
 import com.haulmont.taskman.web.ui.common.*;
 import com.haulmont.workflow.core.entity.*;
@@ -612,9 +616,13 @@ public class ContractPPEditor extends AbstractCardEditor {
 
         public void actionPerform(Component component) {
             Map<String, Object> lookupParams = Collections.<String, Object>singletonMap("windowOpener", "ext$ContractPP.edit");
-            openLookup("ext$Modull.browse", new Lookup.Handler() {
+            ContractPP contractPP = (ContractPP) cardDs.getItem();
+            String windowAlias = "ext$Modull.browse";
+          /*  if (contractPP.getNameContract() == ContractDocType.LICENSE_SERVICE) windowAlias = "ext$Modull.LS.browse";
+            else if (contractPP.getNameContract() == ContractDocType.PROVIDE_SERVICE) windowAlias = "ext$Modull.PS.browse";
+            else windowAlias = "ext$Modull.PD.browse";   */
+            openLookup(windowAlias, new Lookup.Handler() {
                 public void handleLookup(Collection items) {
-                    ContractPP contractPP = (ContractPP) cardDs.getItem();
                     Collection<String> existingModullNames = getExistingModullNames();
                     for (Object item : items) {
                         ExtModull modull = (ExtModull)item;
