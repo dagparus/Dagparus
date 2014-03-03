@@ -10,6 +10,9 @@ import com.haulmont.cuba.core.EntityManager;
 import com.haulmont.cuba.core.Persistence;
 import com.haulmont.cuba.core.Query;
 import com.haulmont.cuba.core.Transaction;
+import com.haulmont.cuba.core.global.Metadata;
+import com.haulmont.cuba.core.global.View;
+import com.haulmont.cuba.core.global.ViewRepository;
 import com.haulmont.ext.core.app.LoadClientService;
 import com.haulmont.ext.core.entity.*;
 import com.haulmont.ext.core.entity.Enum.VillaEnum;
@@ -25,6 +28,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by mahdi on 1/20/14.
@@ -34,6 +38,9 @@ public class LoadClientServiceBean implements LoadClientService {
 
     @Inject
     Persistence persistance;
+
+    @Inject
+    Metadata metadata;
 
     @Override
     public void loadFromFile(String path) throws IOException {
@@ -95,10 +102,13 @@ public class LoadClientServiceBean implements LoadClientService {
                 }
                 // дальше...
             }
-            if (!companyS[1].equals("") && companyS[2].equals(""))
-                companyExt = createCompany(companyS, villa, null);
-            if (!companyS[1].equals("") && !companyS[2].equals(""))
-                companyExt = createCompany(companyS, villa, findParentCompany(companyS[2]));
+            companyExt = findCompany(companyS[1]);
+            if (companyExt == null) {
+                if (!companyS[1].equals("") && companyS[2].equals(""))
+                    companyExt = createCompany(companyS, villa, null);
+                if (!companyS[1].equals("") && !companyS[2].equals(""))
+                    companyExt = createCompany(companyS, villa, findCompany(companyS[2]));
+            }
 
             String[] clientS = new String[l.length];
             for(int i = 0; i+11<l.length; i++){
@@ -169,8 +179,9 @@ public class LoadClientServiceBean implements LoadClientService {
         Villa villa = null;
         try {
             try {
+                ViewRepository viewRepository = metadata.getViewRepository();
                 EntityManager em = persistance.getEntityManager();
-                Query query = em.createQuery("select v from ext$Villa v where v.villaname =?1 and v.republic.id = ?2");
+                Query query = em.createQuery("select v from ext$Villa v where v.villaname =?1 and v.republic.id = ?2").addView(viewRepository.getView(Villa.class, "edit"));
                 if (!lineS[0].equals("")) query.setParameter(1, lineS[0]);
                 else query.setParameter(1, lineS[2]);
                 query.setParameter(2, republic);
@@ -239,14 +250,15 @@ public class LoadClientServiceBean implements LoadClientService {
     }
 
     //Поиск Юридического лица, как родителя, в бд
-    private CompanyExt findParentCompany(String strCompanyExt) {
+    private CompanyExt findCompany(String strCompanyExt) {
         Transaction tx = persistance.createTransaction();
         CompanyExt companyExt;
         try {
             EntityManager em = persistance.getEntityManager();
             Query query = em.createQuery("select c from ext$CompanyExt c where c.name = ?1");
             query.setParameter(1, strCompanyExt);
-            companyExt =(CompanyExt) query.getResultList().get(0);
+            if (query.getResultList().size() != 0) companyExt =(CompanyExt) query.getResultList().get(0);
+            else companyExt = null;
             tx.commit();
         } finally {
             tx.end();
@@ -254,46 +266,65 @@ public class LoadClientServiceBean implements LoadClientService {
         return companyExt;
     }
 
+    private ExtClient findClient(CompanyExt companyExt) {
+        Transaction tx = persistance.createTransaction();
+        ExtClient extClient;
+        try {
+            EntityManager em = persistance.getEntityManager();
+            Query query = em.createQuery("select c from ext$Client c where c.extCompany.id = ?1");
+            query.setParameter(1, companyExt.getUuid());
+            if (query.getResultList().size() != 0) extClient =(ExtClient) query.getResultList().get(0);
+            else extClient = null;
+            tx.commit();
+        } finally {
+            tx.end();
+        }
+        return extClient;
+    }
+
     //Добавление записи - Клиент, на основании юридического лица
     private void createClient(String[] lineS, CompanyExt companyExt) {
         Transaction tx = persistance.createTransaction();
+     /*   ExtClient extClient = findClient(companyExt);
+        if (extClient == null) extClient = new ExtClient();     */
         ExtClient extClient = new ExtClient();
         try {
             EntityManager em = persistance.getEntityManager();
-            try {
-                extClient.setExtCompany(companyExt);
-                extClient.setSurnameC(lineS[0]);
-                extClient.setNameC(lineS[1]);
-                extClient.setPatronymicC(lineS[2]);
-                if (!lineS[1].equals("") && !lineS[2].equals(""))
-                    extClient.setName(lineS[0] + " " + lineS[1].substring(0,1) + ". " + lineS[2].substring(0,1) + ".");
-                if (!lineS[1].equals("") && lineS[2].equals(""))
-                    extClient.setName(lineS[0] + " " + lineS[1]);
-                if (lineS[1].equals("") && !lineS[2].equals(""))
-                    extClient.setName(lineS[0] + " " + lineS[2]);
-                extClient.setName(lineS[0]);
-                extClient.setPost(lineS[3]);
-                extClient.setNumberTel(lineS[4]);
-                extClient.setNumberTw(lineS[5]);
-                extClient.setPlaceBirth(lineS[6]);
-                extClient.setCountChs(lineS[7]);
-                if (lineS[8] == "жен") extClient.setSex(SexEnum.FEMALE);
-                else extClient.setSex(SexEnum.MALE);
-                extClient.setSurnameR(lineS[9]);
-                extClient.setNameR(lineS[10]);
-                extClient.setPatronymicR(lineS[11]);
-                extClient.setPostR(lineS[12]);
-                extClient.setBank(lineS[13]);
-                extClient.setInn(lineS[14]);
-                extClient.setKpp(lineS[15]);
-                extClient.setRs(lineS[16]);
-                extClient.setKs(lineS[17]);
-                extClient.setBik(lineS[18]);
-                extClient.setLs(lineS[19]);
-                extClient.setTreasuryDepartment(lineS[20]);
-            }  catch (Exception e) {
-                //Не все так плохо, двигайся дальше...
-            }
+                try {
+                    extClient.setExtCompany(companyExt);
+                    extClient.setSurnameC(lineS[0]);
+                    extClient.setNameC(lineS[1]);
+                    extClient.setPatronymicC(lineS[2]);
+                    if (!lineS[1].equals("") && !lineS[2].equals(""))
+                        extClient.setName(lineS[0] + " " + lineS[1].substring(0,1) + ". " + lineS[2].substring(0,1) + ".");
+                    else if (!lineS[1].equals("") && lineS[2].equals(""))
+                        extClient.setName(lineS[0] + " " + lineS[1]);
+                    else if (lineS[1].equals("") && !lineS[2].equals(""))
+                        extClient.setName(lineS[0] + " " + lineS[2]);
+                    else extClient.setName(lineS[0]);
+                    extClient.setPost(lineS[3]);
+                    extClient.setNumberTel(lineS[4]);
+                    extClient.setNumberTw(lineS[5]);
+                    extClient.setPlaceBirth(lineS[6]);
+                    extClient.setCountChs(lineS[7]);
+                    if (lineS[8] == "жен") extClient.setSex(SexEnum.FEMALE);
+                    else extClient.setSex(SexEnum.MALE);
+                    extClient.setSurnameR(lineS[9]);
+                    extClient.setNameR(lineS[10]);
+                    extClient.setPatronymicR(lineS[11]);
+                    extClient.setPostR(lineS[12]);
+                    extClient.setBank(lineS[13]);
+                    extClient.setInn(lineS[14]);
+                    extClient.setKpp(lineS[15]);
+                    extClient.setRs(lineS[16]);
+                    extClient.setKs(lineS[17]);
+                    extClient.setBik(lineS[18]);
+                    extClient.setLs(lineS[19]);
+                    extClient.setTreasuryDepartment(lineS[20]);
+                }  catch (Exception e) {
+                    //Не все так плохо, двигайся дальше...
+                }
+         //   em.merge(extClient);
             em.persist(extClient);
             tx.commit();
         } finally {
