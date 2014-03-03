@@ -7,6 +7,7 @@ import com.haulmont.cuba.core.global.LoadContext;
 import com.haulmont.cuba.core.global.MessageProvider;
 import com.haulmont.cuba.core.global.MetadataProvider;
 import com.haulmont.cuba.core.global.UserSessionProvider;
+import com.haulmont.cuba.core.sys.jpql.antlr.JPAParser;
 import com.haulmont.cuba.gui.ServiceLocator;
 import com.haulmont.cuba.gui.UserSessionClient;
 import com.haulmont.cuba.gui.WindowManager;
@@ -46,10 +47,14 @@ import com.haulmont.workflow.core.entity.Card;
 import com.haulmont.workflow.core.entity.CardInfo;
 import com.haulmont.workflow.web.ui.base.ResolutionsFrame;
 import com.haulmont.workflow.web.ui.base.action.CardContext;
+import com.sun.java.swing.plaf.windows.resources.windows;
 import com.vaadin.terminal.ThemeResource;
 import org.apache.commons.lang.BooleanUtils;
 
+
+
 import javax.inject.Inject;
+import javax.xml.crypto.Data;
 import java.util.*;
 
 public class ContractPPBrowser extends AbstractLookup {
@@ -70,6 +75,12 @@ public class ContractPPBrowser extends AbstractLookup {
     protected CheckBox hideResolutions;
 
     @Inject
+    protected DateField comeDateField;
+
+    @Inject
+    protected CheckBox administrationCheckBox;
+
+    @Inject
     protected PopupButton createButton;
 
     @Inject
@@ -83,6 +94,7 @@ public class ContractPPBrowser extends AbstractLookup {
     private boolean inTemplates;
 
     protected PopupButton printButton;
+    protected PopupButton printBuuttoonn;
 
     protected String entityName;
 
@@ -173,8 +185,31 @@ public class ContractPPBrowser extends AbstractLookup {
             printButton.addAction(new ActionPrint("ContractPI"));
             printButton.addAction(new ActionPrint("ContractppAV"));
             printButton.addAction(new ActionPrint("Contractpp_LO_AV"));
+            printButton.addAction(new ActionPrint("Contract_assegint"));
         }
+
+       /* printBuuttoonn = getComponent("printBuuttoonn");
+        if (printBuuttoonn != null) {
+            printBuuttoonn.addAction(new ActionPrintDP("Contract_assegint"));
+        }*/
     }
+  /*  class ActionPrintDP extends AbstractActionPrint{
+        ActionPrintDP(String id){
+            super(id);
+        }
+        @Override
+        public void actionPerform(Component component){
+            ContractPP entity = contractPPDs.getItem();
+            Map<String, Object> entites = new HashMap<String, Object>();
+            entites.put("entity", entity);
+            Report report = loadReport(MessageProvider.getMessage(ContractPPEditor.class, reportName));
+            report = getDsContext().getDataService().reload(report, "report.edit");
+            //openWindow("report$inputParameters", WindowManager.OpenType.DIALOG, Collections.<String, Object>singletonMap("report", report));
+            ReportHelper.printReport(report, entites);
+           // ReportHelper.runReport(report, ContractPPBrowser.this, entity, );
+        }
+
+    }*/
 
     class ActionPrint extends AbstractActionPrint {
         ActionPrint(String id) {
@@ -186,6 +221,14 @@ public class ContractPPBrowser extends AbstractLookup {
             ContractPP entity = contractPPDs.getItem();
             Map<String, Object> entites = new HashMap<String, Object>();
             entites.put("entity", entity);
+            if (id.equals("Contract_assegint")) {
+                administrationCheckBox = getComponent("administration");
+                Boolean administration = administrationCheckBox.getValue();
+                comeDateField = getComponent("dateCome");
+                Date dateCome = comeDateField.getValue();
+                entites.put("administration",administration);
+                entites.put("dateCome", dateCome);
+            }
             Report report = loadReport(MessageProvider.getMessage(ContractPPEditor.class, reportName));
             report = getDsContext().getDataService().reload(report, "report.edit");
             //openWindow("report$inputParameters", WindowManager.OpenType.DIALOG, Collections.<String, Object>singletonMap("report", report));

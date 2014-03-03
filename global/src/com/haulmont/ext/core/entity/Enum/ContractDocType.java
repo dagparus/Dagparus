@@ -17,6 +17,7 @@ public enum ContractDocType implements EnumClass<String> {
     PROVIDE_SERVICE ("PS"),
     PRODUCT_DELIVERY ("PD"),
     CONTRACT_ANTI ("CA"),
+    CONTRACT_ASSIGINT ("CAS"),
     CONTRACT_LO_ANTI ("CLA");
     private String id;
     private ContractDocType(String id) {
@@ -39,6 +40,8 @@ public enum ContractDocType implements EnumClass<String> {
             return CONTRACT_ANTI;
         else if ("CLA".equals(id))
             return CONTRACT_LO_ANTI;
+        else if ("CAS".equals(id))
+            return CONTRACT_ASSIGINT;
         else return null;
     }
 }
