@@ -6,6 +6,7 @@
 
 package com.haulmont.ext.core.app;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -13,5 +14,5 @@ import java.io.IOException;
  */
 public interface LoadClientService {
     String NAME = "myexp_LoadClientService";
-    void loadFromFile(String path) throws IOException;
+    void loadFromFile(File file) throws IOException;
 }

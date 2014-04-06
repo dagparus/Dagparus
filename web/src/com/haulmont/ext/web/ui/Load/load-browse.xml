@@ -31,7 +31,7 @@
                             <rows>
                                 <row>
                                     <label value="msg://pathToCSV"/>
-                                    <textField id="pathToCSV" width="${width}" required = "true"/>
+                                    <upload id="uploadField" caption="msg://open"/>
                                 </row>
                                 <!--   <row>
                                        <label value="msg://codeRegion"/>

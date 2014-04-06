@@ -17,14 +17,13 @@ import com.haulmont.ext.core.app.LoadClientService;
 import com.haulmont.ext.core.entity.*;
 import com.haulmont.ext.core.entity.Enum.VillaEnum;
 import com.haulmont.taskman.core.enums.SexEnum;
+import org.apache.commons.io.FileUtils;
+import org.aspectj.util.FileUtil;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,16 +42,21 @@ public class LoadClientServiceBean implements LoadClientService {
     Metadata metadata;
 
     @Override
-    public void loadFromFile(String path) throws IOException {
-        InputStreamReader inputStream = new FileReader(path);
+    public void loadFromFile(File file) throws IOException {
+       /* InputStreamReader inputStream = new FileReader(path);
         BufferedReader bufferedReader;
         bufferedReader = new BufferedReader(inputStream);
         String line = "";
         List<String[]> lines = new ArrayList<String[]>();
         while ((line = bufferedReader.readLine()) != null) {
             lines.add(line.split(";"));
+        }                                           */
+        List<String> lines = FileUtils.readLines(file);
+        List<String[]> splitLines = new ArrayList<String[]>();
+        for(String l:lines){
+            splitLines.add(l.split(";"));
         }
-        createSuperTransaction(lines);
+        createSuperTransaction(splitLines);
     }
 
     //Разбиение коллекции на массивы-элементы
