@@ -29,22 +29,6 @@
                                 <column flex="1"/>
                             </columns>
                             <rows>
-                             <!--   <row>
-                                    <label value="msg://department"/>
-                                    <lookupPickerField id="department"
-                                                       property="department"
-                                                       optionsDatasource="depDs"
-                                                       required = "true"
-                                                       width="${width}"/>
-                                </row>
-                                <row>
-                                    <label value="msg://verificationPeriod"/>
-                                    <lookupPickerField id="verificationPeriod"
-                                                       property="verificationPeriod"
-                                                       optionsDatasource="verificationPeriodDs"
-                                                       required = "true"
-                                                       width="${width}"/>
-                                </row>         -->
                                 <row>
                                     <label value="msg://pathToCSV"/>
                                     <textField id="pathToCSV" width="${width}" required = "true"/>
