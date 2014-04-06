@@ -6,8 +6,8 @@
 
 <window
         xmlns:dagParus= "http://www.haulmont.com/schema/cuba/gui/window.xsd"
-        class = "com.haulmont.ext.web.ui.load.Load"
-        messagesPack = "com.haulmont.ext.web.ui.load"
+        class = "com.haulmont.ext.web.ui.Load.Load"
+        messagesPack = "com.haulmont.ext.web.ui.Load"
         caption = "msg://browserCaption"
         lookupComponent = "depTable"
         >

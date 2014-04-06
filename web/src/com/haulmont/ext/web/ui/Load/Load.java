@@ -4,7 +4,7 @@
  * Use is subject to license terms.
  */
 
-package com.haulmont.ext.web.ui.load;
+package com.haulmont.ext.web.ui.Load;
 
 import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.web.gui.components.WebButton;

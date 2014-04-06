@@ -63,7 +63,7 @@
      <screen id="ext$Call.edit" template="/com/haulmont/ext/web/ui/Call/call-edit.xml"/>
      <screen id="ext$Call.browse" template="/com/haulmont/ext/web/ui/Call/call-browse.xml"/>
 
-    <screen id="loadClients" template="/com/haulmont/ext/web/ui/load/load-browse.xml"/>
+    <screen id="loadClients" template="/com/haulmont/ext/web/ui/Load/load-browse.xml"/>
 
     <screen id="ext$CompanyExt.browse" template="/com/haulmont/ext/web/ui/TreeCompany/companyExt-browse.xml"/>
     <screen id="ext$CompanyExt.lookup" template="/com/haulmont/ext/web/ui/TreeCompany/companyExt-lookup.xml"/>
