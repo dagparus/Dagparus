@@ -2,24 +2,18 @@ package com.haulmont.ext.web.ui.ContractPP;
 
 
 import com.haulmont.chile.core.model.MetaPropertyPath;
-import com.haulmont.cuba.core.entity.Entity;
 import com.haulmont.cuba.core.global.LoadContext;
 import com.haulmont.cuba.core.global.MessageProvider;
 import com.haulmont.cuba.core.global.MetadataProvider;
 import com.haulmont.cuba.core.global.UserSessionProvider;
-import com.haulmont.cuba.core.sys.jpql.antlr.JPAParser;
 import com.haulmont.cuba.gui.ServiceLocator;
 import com.haulmont.cuba.gui.UserSessionClient;
 import com.haulmont.cuba.gui.WindowManager;
 import com.haulmont.cuba.gui.components.*;
-import com.haulmont.cuba.gui.components.actions.CreateAction;
 import com.haulmont.cuba.gui.components.actions.EditAction;
 import com.haulmont.cuba.gui.components.actions.RefreshAction;
-import com.haulmont.cuba.gui.data.CollectionDatasource;
 import com.haulmont.cuba.gui.data.Datasource;
 import com.haulmont.cuba.gui.data.GroupDatasource;
-import com.haulmont.cuba.gui.data.ValueListener;
-import com.haulmont.cuba.gui.data.impl.CollectionDsListenerAdapter;
 import com.haulmont.cuba.gui.data.impl.DsListenerAdapter;
 import com.haulmont.cuba.gui.report.ReportHelper;
 import com.haulmont.cuba.gui.settings.Settings;
@@ -46,8 +40,6 @@ import com.haulmont.workflow.core.app.WfUtils;
 import com.haulmont.workflow.core.entity.Card;
 import com.haulmont.workflow.core.entity.CardInfo;
 import com.haulmont.workflow.web.ui.base.ResolutionsFrame;
-import com.haulmont.workflow.web.ui.base.action.CardContext;
-import com.sun.java.swing.plaf.windows.resources.windows;
 import com.vaadin.terminal.ThemeResource;
 import org.apache.commons.lang.BooleanUtils;
 

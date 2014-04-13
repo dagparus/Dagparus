@@ -7,7 +7,7 @@
     </view>
 
     <view class="com.haulmont.ext.core.entity.Call" name="edit" extends="_local">
-        <property name="extClient" view="_minimal"/>
+        <property name="extClient" view="edit"/>
         <property name="priority" view="_minimal"/>
     </view>
 

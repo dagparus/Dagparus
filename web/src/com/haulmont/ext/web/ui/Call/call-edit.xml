@@ -87,118 +87,131 @@
 
                         <groupBox stylename="edit-area">
                             <scrollbox>
-                                <vbox spacing="true"
-                                      width="-1px"
-                                      height="-1px">
-                                    <grid id="captionInfo"
-                                          spacing="true"
-                                          align="TOP_CENTER"
-                                          margin="true;false;false;false">
-                                        <columns>
-                                            <column flex="1"/>
-                                            <column flex="1"/>
-                                            <column flex="1"/>
-                                            <column flex="1"/>
-                                            <column flex="1"/>
-                                            <column flex="1"/>
-                                            <column flex="1"/>
-                                            <column flex="1"/>
-                                        </columns>
-                                        <rows>
-                                            <row>
-                                                <label id="docNumberLabel"
-                                                       value="msg://number"/>
-                                                <label id="docNumber"
-                                                       datasource="cardDs"
-                                                       property="number"/>
-
-                                                <label value="   |   "/>
-
-                                                <label value="msg://state"/>
-                                                <label id="state"
-                                                       datasource="cardDs"
-                                                       property="locState"
-                                                       stylename="bold"/>
-
-                                                <label value="   |   "/>
-
-                                                <label value="msg://createDate"/>
-                                                <label id="createTs"
-                                                       datasource="cardDs"
-                                                       property="dateTime"
-                                                       dateFormat="msg://dateTimeFormat"
-                                                       stylename="bold"/>
-                                            </row>
-                                        </rows>
-                                    </grid>
-                                    <grid stylename="separator"
-                                          margin="true"
-                                          spacing="true"
-                                          expandable="false">
-                                        <columns>
-                                            <column flex="1"/>
-                                            <column flex="1"/>
-                                            <column flex="1"/>
-                                            <column flex="1"/>
-                                        </columns>
-                                        <rows>
-                                            <row>
-                                                <label id="name"
-                                                       value="msg://name"/>
-                                                <textField id="name"
+                                <hbox spacing="true" margin="true">
+                                    <vbox spacing="true"
+                                          width="-1px"
+                                          height="-1px">
+                                        <grid id="captionInfo"
+                                              spacing="true"
+                                              align="TOP_CENTER"
+                                              margin="true;false;false;false">
+                                            <columns>
+                                                <column flex="1"/>
+                                                <column flex="1"/>
+                                                <column flex="1"/>
+                                                <column flex="1"/>
+                                                <column flex="1"/>
+                                                <column flex="1"/>
+                                                <column flex="1"/>
+                                                <column flex="1"/>
+                                            </columns>
+                                            <rows>
+                                                <row>
+                                                    <label id="docNumberLabel"
+                                                           value="msg://number"/>
+                                                    <label id="docNumber"
                                                            datasource="cardDs"
-                                                           property="name"
-                                                           width="${width}"/>
-                                                <label id="telephoneNumber"
-                                                       value="msg://telephoneNumber"/>
-                                                <textField id="telephoneNumber"
+                                                           property="number"/>
+
+                                                    <label value="   |   "/>
+
+                                                    <label value="msg://state"/>
+                                                    <label id="state"
                                                            datasource="cardDs"
-                                                           property="telephoneNumber"
-                                                           width="${width}"/>
-                                            </row>
-                                            <row>
-                                                <label value="msg://extClient"/>
-                                                <actionsField id="extClient"
-                                                              datasource="cardDs"
-                                                              property="extClient"
-                                                              optionsDatasource="clientDs"
-                                                              lookupScreen="ext$Client.browse"
-                                                              width="${width}"
-                                                              dropdown="true"
-                                                              lookup="true"
-                                                              open="true"/>
-                                                <label id="priorityLabel" value="msg://Task.priority"/>
-                                                <lookupField id="priority" optionsDatasource="prioritiesDs"
-                                                             datasource="cardDs" property="priority"
-                                                             width="${width}"/>
-                                            </row>
+                                                           property="locState"
+                                                           stylename="bold"/>
 
-                                            <row>
-                                                <label id="finishDatePlan"
-                                                       value="msg://finishDatePlan"/>
-                                                <dateField id="finishDatePlan"
+                                                    <label value="   |   "/>
+
+                                                    <label value="msg://createDate"/>
+                                                    <label id="createTs"
                                                            datasource="cardDs"
-                                                           property="finishDatePlan"
-                                                           width="${width}"/>
+                                                           property="dateTime"
+                                                           dateFormat="msg://dateTimeFormat"
+                                                           stylename="bold"/>
+                                                </row>
+                                            </rows>
+                                        </grid>
+                                        <grid stylename="separator"
+                                              margin="true"
+                                              spacing="true"
+                                              expandable="false">
+                                            <columns>
+                                                <column flex="1"/>
+                                                <column flex="1"/>
+                                                <column flex="1"/>
+                                                <column flex="1"/>
+                                            </columns>
+                                            <rows>
+                                                <row>
+                                                    <label id="name"
+                                                           value="msg://name"/>
+                                                    <textField id="name"
+                                                               datasource="cardDs"
+                                                               property="name"
+                                                               width="${width}"/>
+                                                    <label id="telephoneNumber"
+                                                           value="msg://telephoneNumber"/>
+                                                    <textField id="telephoneNumber"
+                                                               datasource="cardDs"
+                                                               property="telephoneNumber"
+                                                               width="${width}"/>
+                                                </row>
+                                                <row>
+                                                    <label id="finishDatePlan"
+                                                           value="msg://finishDatePlan"/>
+                                                    <dateField id="finishDatePlan"
+                                                               datasource="cardDs"
+                                                               property="finishDatePlan"
+                                                               width="${width}"/>
+                                                    <label id="priorityLabel" value="msg://Task.priority"/>
+                                                    <lookupField id="priority" optionsDatasource="prioritiesDs"
+                                                                 datasource="cardDs" property="priority"
+                                                                 width="${width}"/>
+                                                </row>
+                                                <row>
+                                                    <label value="msg://extClient"/>
+                                                    <actionsField id="extClient"
+                                                                  datasource="cardDs"
+                                                                  property="extClient"
+                                                                  optionsDatasource="clientDs"
+                                                                  lookupScreen="ext$Client.browse"
+                                                                  width="400px"
+                                                                  dropdown="true"
+                                                                  lookup="true"
+                                                                  open="true"
+                                                                  colspan="2"/>
 
-                                            </row>
+                                                </row>
+                                                <row>
+                                                    <label value="msg://extCompany"/>
+                                                    <textField id="extCompany" colspan="2" width="630px"/>
+                                                </row>
+                                                <row>
+                                                    <label id="callDescription"
+                                                           value="msg://callDescription"/>
+                                                    <textField id="callDescription"
+                                                               datasource="cardDs"
+                                                               property="callDescription"
+                                                               width="630px"
+                                                               rows="8"
+                                                               required="true"
+                                                               colspan="2"
+                                                               resizable="true"/>
+                                                </row>
 
-                                            <row>
-                                                <label id="callDescription"
-                                                       value="msg://callDescription"/>
-                                                <textField id="callDescription"
-                                                           datasource="cardDs"
-                                                           property="callDescription"
-                                                           width="666px"
-                                                           rows="8"
-                                                           required="true"
-                                                           colspan="2"
-                                                           resizable="true"/>
-                                            </row>
-
-                                        </rows>
-                                    </grid>
-                                </vbox>
+                                            </rows>
+                                        </grid>
+                                    </vbox>
+                                    <vbox spacing="true" margin="true">
+                                        <label id="prevCall" value="msg://prevCall"/>/>
+                                        <textField id="prevCall"
+                                                   width="500px"
+                                                   rows="25"
+                                                   colspan="2"
+                                                   resizable="true"/>
+                                    </vbox>
+                                </hbox>
                             </scrollbox>
                         </groupBox>
                     </tab>

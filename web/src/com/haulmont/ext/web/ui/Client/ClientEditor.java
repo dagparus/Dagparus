@@ -10,6 +10,8 @@ import com.haulmont.ext.core.entity.ExtClient;
 import com.haulmont.taskman.core.enums.SexEnum;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class ClientEditor extends AbstractEditor {
@@ -46,9 +48,11 @@ public class ClientEditor extends AbstractEditor {
                 ExtClient SexObjext = (ExtClient) source;
                 SexEnum sexIn = SexObjext.getSex();
                 String surnameCValue = surnameCField.getValue();
+                if (surnameCValue == null) surnameCValue = "";
                 String nameCValue = nameCField.getValue();
+                if (nameCValue == null) nameCValue = "";
                 String patronymicCValue = patronymicCField.getValue();
-                String nameValue = nameField.getValue();
+                if (patronymicCValue == null) patronymicCValue = "";
                 if ("sex".equals(property) & (surnameCField.getValue() != null || nameCField.getValue() != null || patronymicCField.getValue() != null)) {
                     if (value == SexEnum.FEMALE) {
                         surnameRField.setValue(surnameCValue.substring(0, surnameCValue.length() - 1) + (char) 1086 + (char) 1081);
@@ -65,28 +69,28 @@ public class ClientEditor extends AbstractEditor {
                 if ("surnameC".equals(property)) {
                     if (sexIn == SexEnum.FEMALE) {
                         surnameRField.setValue(surnameCValue.substring(0, surnameCValue.length() - 1) + (char) 1086 + (char) 1081);
-                        nameField.setValue(surnameCValue);
+                        nameField.setValue(surnameCValue + " " + nameCValue + " " + patronymicCValue);
                     } else {
                         surnameRField.setValue(surnameCValue + (char) 1072);
-                        nameField.setValue(surnameCValue);
+                        nameField.setValue(surnameCValue + " " + nameCValue + " " + patronymicCValue);
                     }
                 }
                 if ("nameC".equals(property)) {
                     if (sexIn == SexEnum.FEMALE) {
                         nameRField.setValue(nameCValue.substring(0, nameCValue.length() - 1) + (char) 1099);
-                        nameField.setValue(surnameCValue + " " + nameCValue.substring(0,1) + ".");
+                        nameField.setValue(surnameCValue + " " + nameCValue + " " + patronymicCValue);
                     } else {
                         nameRField.setValue(nameCValue + (char) 1072);
-                        nameField.setValue(surnameCValue + " " + nameCValue.substring(0,1) + ".");
+                        nameField.setValue(surnameCValue + " " + nameCValue + " " + patronymicCValue);
                     }
                 }
                 if ("patronymicC".equals(property)) {
                     if (sexIn == SexEnum.FEMALE) {
                         patronymicRField.setValue(patronymicCValue.substring(0, patronymicCValue.length() - 1) + (char) 1099);
-                        nameField.setValue(surnameCValue + " " + nameCValue.substring(0,1) + "." + patronymicCValue.substring(0,1) + ".");
+                        nameField.setValue(surnameCValue + " " + nameCValue + " " + patronymicCValue);
                     } else {
                         patronymicRField.setValue(patronymicCValue + (char) 1072);
-                        nameField.setValue(surnameCValue + " " + nameCValue.substring(0,1) + "." + patronymicCValue.substring(0,1) + ".");
+                        nameField.setValue(surnameCValue + " " + nameCValue + " " + patronymicCValue);
                     }
                 }
             }

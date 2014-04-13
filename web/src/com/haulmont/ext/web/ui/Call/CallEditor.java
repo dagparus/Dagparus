@@ -30,6 +30,7 @@ import com.haulmont.docflow.core.entity.DocKind;
 import com.haulmont.docflow.core.entity.NumeratorType;
 import com.haulmont.docflow.web.DocflowAppWindow;
 import com.haulmont.ext.core.entity.Call;
+import com.haulmont.ext.core.entity.ExtClient;
 import com.haulmont.ext.web.ui.Call.CallAccessData;
 import com.haulmont.taskman.web.ui.common.CardProjectsFrame;
 import com.haulmont.taskman.web.ui.common.CardRelationsFrame;
@@ -92,7 +93,7 @@ public class CallEditor extends AbstractCardEditor {
     protected NumerationService docflow_NumerationService;
 
     @Inject
-    protected TextField telephoneNumber, name, callDescription;
+    protected TextField telephoneNumber, name, callDescription, prevCall, extCompany;
 
     @Inject
     protected ActionsField extClient;
@@ -124,6 +125,7 @@ public class CallEditor extends AbstractCardEditor {
         priority = getComponent("priority");
         finishDatePlan = getComponent("finishDatePlan");
         callDescription = getComponent("callDescription");
+       // prevCall = getComponent("prevCall");
 
         addListener(new CloseListener() {
             public void windowClosed(String actionId) {
@@ -313,14 +315,37 @@ public class CallEditor extends AbstractCardEditor {
         //получение сущности
         Call call = (Call) getItem();
 
-        User user = UserSessionProvider.getUserSession().getCurrentOrSubstitutedUser();
 
+        User user = UserSessionProvider.getUserSession().getCurrentOrSubstitutedUser();
         if (!WfUtils.isCardInState(call, null)) callSetEditable(false);
 
         LoadContext qtx = new LoadContext(CardRole.class);
         qtx.setQueryString("select cr from wf$CardRole cr where cr.card.id =:card").addParameter("card", call);
         qtx.setView("card-edit");
         List<CardRole> cardRole = ServiceLocator.getDataService().loadList(qtx);
+
+        LoadContext calltx = new LoadContext(Call.class);
+        calltx.setQueryString("select c from ext$Call c where c.telephoneNumber =:number").addParameter("number", call.getTelephoneNumber());
+        calltx.setView("edit");
+        List<Call> listCall = ServiceLocator.getDataService().loadList(calltx);
+        if(listCall.contains(call)) listCall.remove(call);
+        String string = "", localDescription = "";
+        int i = listCall.size();
+        for(Call l:listCall) {
+            localDescription = l.getCallDescription();
+            string = "\n" + string;
+            string = i-- + ". Дата и время звонка:" + localDescription.substring(localDescription.indexOf(":") + 1) + "\n" + string;
+        }
+        prevCall.setValue(string);
+        prevCall.setEditable(false);
+
+        try {
+            extCompany.setValue(call.getExtClient().getExtCompany().getName());
+        } catch(Exception e) {
+            extCompany.setValue("");
+            // and go on..
+        }
+        extCompany.setEditable(false);
 
         for (CardRole cR : cardRole) {
             if ((cR.getCode().equals("receiver") && cR.getUser().getLogin().equals(user.getLogin()) && WfUtils.isCardInState(call, "Zvonok_naznachen"))

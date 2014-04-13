@@ -11,7 +11,6 @@ import com.haulmont.cuba.gui.upload.FileUploadingAPI;
 import com.haulmont.cuba.web.gui.components.WebButton;
 import com.haulmont.cuba.web.gui.components.WebVBoxLayout;
 import com.haulmont.ext.core.app.LoadClientService;
-import sun.awt.AppContext;
 
 import javax.inject.Inject;
 import java.io.File;
